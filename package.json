@@ -1,0 +1,28 @@
+{
+  "name": "phaser3-tilemap-pack",
+  "version": "1.0.0",
+  "description": "A Phaser 3 Tilemap & Asset Pack Template",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "npm run build && webpack-dev-server --port=8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "B3L7",
+  "license": "MIT",
+  "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "devDependencies": {
+    "webpack-dev-server": "^2.11.0",
+    "webpack": "^3.4.1"
+  },
+  "dependencies": {
+    "phaser": "^3.3.0"
+  }
+}
