@@ -9,20 +9,20 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/B3L7/phaser3-tilemap-pack"
   },
   "author": "B3L7",
   "license": "MIT",
   "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/B3L7/phaser3-tilemap-pack/issues"
   },
   "homepage": "",
   "devDependencies": {
-    "webpack-dev-server": "^2.11.0",
-    "webpack": "^3.4.1"
+    "webpack-dev-server": "^3.1.4",
+    "webpack": "^4.8.3"
   },
   "dependencies": {
-    "phaser": "^3.3.0"
+    "phaser": "^3.8.0"
   }
 }

@@ -1,0 +1,37 @@
+{ 
+    "Preload": {
+        "files": [
+            {
+                "type": "image",
+                "key": "tiles",
+                "url": "assets/tiles/tiles.png"
+            },
+            {
+                "type": "image",
+                "key": "player",
+                "url": "assets/sprites/player.png"
+            },
+            {
+                "type": "image",
+                "key": "enemy",
+                "url": "assets/sprites/enemy.png"
+            }
+
+        ]
+    },
+    "Level1": {
+         "files": [
+            {
+              "type": "tilemapTiledJSON",
+              "key": "map",
+              "url": "assets/maps/level1.json"
+            }
+        ]
+        
+    },
+    "meta": {
+        "game": "Phaser3 Tilemap Asset-pack Example",
+        "author": "B3L7",
+        "URL": "https://github.com/B3L7/phaser3-tilemap-pack"
+    }
+}

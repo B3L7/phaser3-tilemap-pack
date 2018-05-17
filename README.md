@@ -22,3 +22,12 @@ Run next commands in your terminal:
 Based on Project Template by Richard Davey:
 [Phaser 3 Webpack Project Template](https://github.com/photonstorm/phaser3-project-template)
 
+and 
+
+[Generic Platformer and Phaser Bootstrap Project](https://github.com/nkholski/phaser3-es6-webpack)
+
+## Graphics and Sound
+
+[16x16 Fantasy tileset](https://opengameart.org/content/16x16-fantasy-tileset)
+
+
