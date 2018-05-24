@@ -6,7 +6,7 @@ export default class Preload extends Phaser.Scene {
   }
 
   preload(){
-    this.load.pack('pack', 'assets/pack.json', 'Preload');
+    this.load.pack('Preload', 'assets/pack.json', 'Preload');
   }
       
   create() {

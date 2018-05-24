@@ -22,9 +22,9 @@
     "Level1": {
          "files": [
             {
-              "type": "tilemapTiledJSON",
-              "key": "map",
-              "url": "assets/maps/level1.json"
+                "type": "tilemapTiledJSON",
+                "key": "map",
+                "url": "assets/maps/level1.json"
             }
         ]
         

@@ -6,8 +6,12 @@ import Level from './scenes/Level'
 const config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
+    pixelArt: true,
     width: 800,
     height: 600,
+    physics: {
+        default: 'arcade'
+    },
     scene: [
         Preload,
         Level
