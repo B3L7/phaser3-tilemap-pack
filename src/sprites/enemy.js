@@ -7,7 +7,6 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   }
 
   update(time, delta) {
-    //this.scene.physics.world.collide(this, this.scene.layer);
     
   }
 

@@ -1,6 +1,6 @@
 # Phaser 3 Tilemap & Asset Pack Project Template
 
-A Phaser 3 Project Template with Webpack, Tilemap, and Asset Pack
+A Phaser 3 Project Template with Webpack, Tilemap, and Asset Pack. This template was created to illustrate the conecept of having a single Level Class (Extended from the Scene Class) which generates the game level from dynamically loaded tilemaps.
 
 ### Requirements
 
@@ -16,7 +16,7 @@ Run next commands in your terminal:
 |---------|-------------|
 | `npm install` | Install dependencies and launch browser with examples.|
 | `npm start` | Launch browser to show the examples. <br> Press `Ctrl + c` to kill **http-server** process. |
-=======
+
 
 ## References
 Based on Project Template by Richard Davey:

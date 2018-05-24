@@ -5,13 +5,13 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.scene = config.scene;
     this.input = this.scene.input.keyboard.createCursorKeys();
     this.scene.add.existing(this);
+    this.canLoad = true;
   }
 
   update(time, delta) {
-    //this.scene.physics.world.collide(this, this.scene.layer);
-    //this.scene.physics.world.collide(this, this.scene.enemies);
 
-     this.body.setVelocity(0);
+    //movement
+    this.body.setVelocity(0);
 
     if (this.input.left.isDown)
     {
@@ -29,6 +29,26 @@ export default class Player extends Phaser.GameObjects.Sprite {
     else if (this.input.down.isDown)
     {
         this.body.setVelocityY(64);
+    }
+
+
+    //check if outside bounds
+    if (this.canLoad) {
+      if (this.x > this.scene.physics.world.bounds.width) {
+        this.scene.global.load = this.scene.map.properties.loadRight;
+        this.canLoad = false;
+      } else if (this.x < 0) {
+        this.scene.global.load = this.scene.map.properties.loadLeft;
+        this.canLoad = false;
+      } else if (this.y > this.scene.physics.world.bounds.height) {
+        this.scene.global.load = this.scene.map.properties.loadDown;
+        this.canLoad = false;
+        this.scene.end();
+      } else if (this.y < 0) {
+        this.scene.global.load = this.scene.map.properties.loadUp;
+        this.canLoad = false;
+        this.scene.end();
+      }
     }
     
   }

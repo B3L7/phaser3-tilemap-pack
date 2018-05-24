@@ -15,19 +15,19 @@
                 "type": "image",
                 "key": "enemy",
                 "url": "assets/sprites/enemy.png"
+            },
+            {
+                "type": "tilemapTiledJSON",
+                "key": "Level1",
+                "url": "assets/maps/level1.json"
+            },
+            {
+                "type": "tilemapTiledJSON",
+                "key": "Level2",
+                "url": "assets/maps/level2.json"
             }
 
         ]
-    },
-    "Level1": {
-         "files": [
-            {
-                "type": "tilemapTiledJSON",
-                "key": "map",
-                "url": "assets/maps/level1.json"
-            }
-        ]
-        
     },
     "meta": {
         "game": "Phaser3 Tilemap Asset-pack Example",

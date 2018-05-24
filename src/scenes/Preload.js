@@ -22,10 +22,7 @@ export default class Preload extends Phaser.Scene {
           max: 4
         }
       },
-      load : {
-        level: "Level1",
-        spawn: "spawn1",
-      }
+      load : "Level1"
     };
   }
 }

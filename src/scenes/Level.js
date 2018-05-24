@@ -13,11 +13,12 @@ export default class Level extends Phaser.Scene {
   }
 
   preload(){
-    this.load.pack('Level', 'assets/pack.json', this.global.load.level); //the appropriate section of the asset pack is loaded based on what is currently set globally
   }
       
   create() {
-    this.map = this.make.tilemap({ key: 'map' });
+    this.map = this.make.tilemap({ key: this.global.load });
+    this.physics.world.bounds.width = this.map.widthInPixels;
+    this.physics.world.bounds.height = this.map.heightInPixels;
     let tileset = this.map.addTilesetImage('tiles');
     this.layer = this.map.createStaticLayer('tileLayer', tileset, 0, 0);
     this.layer.setCollisionByProperty({ collide: true });
@@ -54,6 +55,10 @@ export default class Level extends Phaser.Scene {
           this.enemies.add(enemy);
         }
       });
+  }
+
+  end(){
+    this.scene.restart(this.global);
   }
 
 }
