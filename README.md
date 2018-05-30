@@ -2,6 +2,8 @@
 
 A Phaser 3 Project Template with Webpack, Tilemap, and File Pack. This template was created to illustrate the conecept of having a single Level Class (Extended from the Scene Class) which generates the game level from dynamically loaded tilemaps.
 
+Try the [demo!](https://b3l7.github.io/phaser3-tilemap-pack/)
+
 ### Requirements
 
 We need [Node.js](https://nodejs.org) to install and run scripts.
