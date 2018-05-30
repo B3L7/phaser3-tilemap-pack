@@ -1,28 +1,28 @@
 export default class Preload extends Phaser.Scene {
-  constructor() {
+  constructor() 
+  {
     super({
       key: 'Preload'
     });
   }
 
-  preload(){
+  preload()
+  {
     this.load.pack('Preload', 'assets/pack.json', 'Preload');
   }
       
-  create() {
-    this.initGlobals(); //create an object which is passed to the Level scene for storing inter-level data such as spawn info, player heath, etc...
-    this.scene.start('Level', this.global);
+  create() 
+  {
+    this.initRegistry(); //initialize the starting registry values.
+    this.scene.start('Level');
   }
 
-  initGlobals() {
-    this.global = {
-      player : {
-        heatlh: {
-          current: 4,
-          max: 4
-        }
-      },
-      load : "Level1"
-    };
+  initRegistry() 
+  {
+    //the game registry provides a place accessible by all scenes to set and get data.
+    //Here we store our key that tells the LevelScene what map to load.
+    this.registry.set('player_health_max', 4);
+    this.registry.set('player_health_current', 4);
+    this.registry.set('load', 'Level1');
   }
 }

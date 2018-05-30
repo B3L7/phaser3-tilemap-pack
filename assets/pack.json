@@ -18,13 +18,23 @@
             },
             {
                 "type": "tilemapTiledJSON",
-                "key": "Level1",
+                "key": "Level1Map",
                 "url": "assets/maps/level1.json"
             },
             {
+                "type": "audio",
+                "key": "Level1Music",
+                "url": "assets/music/14-BarbarianKing.mp3"
+            },
+            {
                 "type": "tilemapTiledJSON",
-                "key": "Level2",
+                "key": "Level2Map",
                 "url": "assets/maps/level2.json"
+            },
+            {
+                "type": "audio",
+                "key": "Level2Music",
+                "url": "assets/music/15-Dungeon.mp3"
             }
 
         ]

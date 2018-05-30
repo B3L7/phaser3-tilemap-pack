@@ -1,14 +1,16 @@
 export default class Player extends Phaser.GameObjects.Sprite {
-  constructor(config) {
+  constructor(config) 
+  {
     super(config.scene, config.x, config.y, 'player');
     config.scene.physics.world.enable(this);
     this.scene = config.scene;
     this.input = this.scene.input.keyboard.createCursorKeys();
-    this.scene.add.existing(this);
     this.canLoad = true;
+    this.scene.add.existing(this);
   }
 
-  update(time, delta) {
+  update(time, delta) 
+  {
 
     //movement
     this.body.setVelocity(0);
@@ -32,26 +34,27 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
 
 
-    //check if outside bounds
-    if (this.canLoad) {
+    //check if outside bounds, if out of bounds set load registry to appropriate value from map then tell the Level to reload
+    if (this.canLoad) 
+    {
       if (this.x > this.scene.physics.world.bounds.width) {
-        this.scene.global.load = this.scene.map.properties.loadRight;
+        this.scene.registry.set('load', this.scene.map.properties.loadRight);
         this.canLoad = false;
+        this.scene.end();
       } else if (this.x < 0) {
-        this.scene.global.load = this.scene.map.properties.loadLeft;
+        this.scene.registry.set('load', this.scene.map.properties.loadLeft);
         this.canLoad = false;
+        this.scene.end();
       } else if (this.y > this.scene.physics.world.bounds.height) {
-        this.scene.global.load = this.scene.map.properties.loadDown;
+        this.scene.registry.set('load', this.scene.map.properties.loadDown);
         this.canLoad = false;
         this.scene.end();
       } else if (this.y < 0) {
-        this.scene.global.load = this.scene.map.properties.loadUp;
+        this.scene.registry.set('load', this.scene.map.properties.loadUp);
         this.canLoad = false;
         this.scene.end();
       }
     }
-    
   }
-
 
 }

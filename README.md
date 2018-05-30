@@ -1,6 +1,6 @@
-# Phaser 3 Tilemap & Asset Pack Project Template
+# Phaser 3 Tilemap & File Pack Project Template
 
-A Phaser 3 Project Template with Webpack, Tilemap, and Asset Pack. This template was created to illustrate the conecept of having a single Level Class (Extended from the Scene Class) which generates the game level from dynamically loaded tilemaps.
+A Phaser 3 Project Template with Webpack, Tilemap, and File Pack. This template was created to illustrate the conecept of having a single Level Class (Extended from the Scene Class) which generates the game level from dynamically loaded tilemaps.
 
 ### Requirements
 
@@ -29,5 +29,7 @@ and
 ## Graphics and Sound
 
 [16x16 Fantasy tileset](https://opengameart.org/content/16x16-fantasy-tileset)
+
+[Generic 8-bit JRPG Soundtrack](https://opengameart.org/content/generic-8-bit-jrpg-soundtrack)
 
 
