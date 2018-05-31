@@ -2,19 +2,25 @@
     "Preload": {
         "files": [
             {
+                "type": "atlas",
+                "key": "atlas",
+                "textureURL": "assets/atlas.png",
+                "atlasURL": "assets/atlas.json"
+            },
+            {
+                "type": "xml",
+                "key": "minecraftXML",
+                "url": "assets/minecraft.fnt"
+            },
+            {
                 "type": "image",
                 "key": "tiles",
                 "url": "assets/tiles/tiles.png"
             },
             {
-                "type": "image",
-                "key": "player",
-                "url": "assets/sprites/player.png"
-            },
-            {
-                "type": "image",
-                "key": "enemy",
-                "url": "assets/sprites/enemy.png"
+                "type": "audio",
+                "key": "coinSFX",
+                "url": "assets/sfx/sfx_coin_double2.wav"
             },
             {
                 "type": "tilemapTiledJSON",

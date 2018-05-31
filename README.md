@@ -10,6 +10,10 @@ We need [Node.js](https://nodejs.org) to install and run scripts.
 
 [Tiled](https://www.mapeditor.org/) needed to make and edit tilemaps.
 
+[Littera](http://kvazars.com/littera/) to make bitmap font.
+
+[Leshy Spritetool](https://www.leshylabs.com/apps/sstool/) used to make atlas.
+
 ## Install and run
 
 Run next commands in your terminal:
@@ -17,6 +21,8 @@ Run next commands in your terminal:
 | Command | Description |
 |---------|-------------|
 | `npm install` | Install dependencies and launch browser with examples.|
+| `npm run dev` | Perform a quick build without minification.|
+| `npm run build` | Perform a final build with minification.|
 | `npm start` | Launch browser to show the examples. <br> Press `Ctrl + c` to kill **http-server** process. |
 
 
@@ -33,5 +39,11 @@ and
 [16x16 Fantasy tileset](https://opengameart.org/content/16x16-fantasy-tileset)
 
 [Generic 8-bit JRPG Soundtrack](https://opengameart.org/content/generic-8-bit-jrpg-soundtrack)
+
+[512 Sound Effects (8-bit style)](https://opengameart.org/content/512-sound-effects-8-bit-style)
+
+[Minecraft Font](https://www.dafont.com/minecraft.font)
+
+
 
 

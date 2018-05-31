@@ -1,12 +1,14 @@
 import 'phaser';
 
-import Preload from './scenes/Preload'
-import Level from './scenes/Level'
+import Preload from './scenes/Preload';
+import Level from './scenes/Level';
+import HUD from './scenes/HUD';
 
 const config = {
     type: Phaser.AUTO,
-    parent: 'phaser-example',
+    parent: 'phaser-tilemap-pack',
     pixelArt: true,
+    clearBeforeRender: false,
     width: 800,
     height: 600,
     physics: {
@@ -14,7 +16,8 @@ const config = {
     },
     scene: [
         Preload,
-        Level
+        Level,
+        HUD
     ]
 };
 

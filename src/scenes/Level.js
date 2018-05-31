@@ -1,5 +1,6 @@
 import Player from '../sprites/player'
 import Enemy from '../sprites/enemy'
+import Coins from '../sprites/coins'
 
 export default class Level extends Phaser.Scene {
   constructor() 
@@ -23,14 +24,24 @@ export default class Level extends Phaser.Scene {
     this.map = this.make.tilemap({ key: `${load}Map` });
     this.physics.world.bounds.width = this.map.widthInPixels;
     this.physics.world.bounds.height = this.map.heightInPixels;
-    let tileset = this.map.addTilesetImage('tiles');
-    this.layer = this.map.createStaticLayer('tileLayer', tileset, 0, 0);
+    this.tileset = this.map.addTilesetImage('tiles');
+    this.layer = this.map.createStaticLayer('tileLayer', this.tileset, 0, 0);
     this.layer.setCollisionByProperty({ collide: true }); //make the layer collidable by the property set on the tileset in Tiled
 
+    this.spawnpoints = [];  //create an array to hold the spawnpoints populated by converObjects()
     //set up groups, tell group to run updates on its children, then call the object conversion method
+    this.pickups = this.add.group(null);
     this.enemies = this.add.group(null);
     this.enemies.runChildUpdate = true;
     this.convertObjects();
+
+    let spawn = this.spawnpoints[this.registry.get('spawn')];
+
+    this.player = new Player({
+        scene: this,
+        x: spawn.x, 
+        y: spawn.y,
+      });
 
     //tell the physics system to collide player, appropriate tiles, and other objects based on group
     this.physics.add.collider(this.player, this.layer);
@@ -46,15 +57,31 @@ export default class Level extends Phaser.Scene {
   convertObjects() 
   {
     //objects in map are checked by type(assigned in object layer in Tiled) and the appopriate extended sprite is created
-    let objects = this.map.getObjectLayer("objects");
+    const objects = this.map.getObjectLayer('objects');
+    const level = this.registry.get('load');
+    let coinNum = 1;
     objects.objects.forEach(
       (object) => {
-        if (object.type === "player") {
-          this.player = new Player({
-          scene: this,
-          x: object.x + 8, 
-          y: object.y - 8,
-          });
+        if (object.type === 'spawn') {
+          this.spawnpoints[object.name] = {
+            x: object.x + 8,
+            y: object.y - 8
+          }
+        }
+        if (object.type === 'coins') {
+          let coins;
+          let regName = `${level}_Coins_${coinNum}`;
+          if (this.registry.get(regName) !== 'picked') {
+            coins = new Coins({
+              scene: this,
+              x: object.x + 8, 
+              y: object.y - 8,
+              number: coinNum
+              });
+              this.pickups.add(coins);
+              this.registry.set(regName, 'active');
+            }
+          coinNum += 1;
         }
         if (object.type === "enemy") {
           let enemy = new Enemy({

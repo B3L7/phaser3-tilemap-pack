@@ -18,19 +18,19 @@
          "name":"objects",
          "objects":[
                 {
-                 "gid":92,
+                 "gid":963,
                  "height":16,
                  "id":1,
-                 "name":"player",
+                 "name":"spawnCenter",
                  "rotation":0,
-                 "type":"player",
+                 "type":"spawn",
                  "visible":true,
                  "width":16,
                  "x":352,
-                 "y":592
+                 "y":480
                 }, 
                 {
-                 "gid":91,
+                 "gid":962,
                  "height":16,
                  "id":2,
                  "name":"",
@@ -42,7 +42,7 @@
                  "y":400
                 }, 
                 {
-                 "gid":91,
+                 "gid":962,
                  "height":16,
                  "id":3,
                  "name":"",
@@ -52,6 +52,54 @@
                  "width":16,
                  "x":384,
                  "y":352
+                }, 
+                {
+                 "gid":963,
+                 "height":16,
+                 "id":4,
+                 "name":"spawnDown",
+                 "rotation":0,
+                 "type":"spawn",
+                 "visible":true,
+                 "width":16,
+                 "x":352,
+                 "y":608
+                }, 
+                {
+                 "gid":964,
+                 "height":16,
+                 "id":5,
+                 "name":"",
+                 "rotation":0,
+                 "type":"coins",
+                 "visible":true,
+                 "width":16,
+                 "x":416,
+                 "y":384
+                }, 
+                {
+                 "gid":964,
+                 "height":16,
+                 "id":6,
+                 "name":"",
+                 "rotation":0,
+                 "type":"coins",
+                 "visible":true,
+                 "width":16,
+                 "x":288,
+                 "y":464
+                }, 
+                {
+                 "gid":964,
+                 "height":16,
+                 "id":7,
+                 "name":"",
+                 "rotation":0,
+                 "type":"coins",
+                 "visible":true,
+                 "width":16,
+                 "x":336,
+                 "y":368
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -59,21 +107,29 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":4,
+ "nextobjectid":8,
  "orientation":"orthogonal",
  "properties":
     {
      "loadDown":"Level2",
      "loadLeft":"",
      "loadRight":"",
-     "loadUP":""
+     "loadUP":"",
+     "spawnDown":"spawnUp",
+     "spawnLeft":"",
+     "spawnRight":"",
+     "spawnUp":""
     },
  "propertytypes":
     {
      "loadDown":"string",
      "loadLeft":"string",
      "loadRight":"string",
-     "loadUP":"string"
+     "loadUP":"string",
+     "spawnDown":"string",
+     "spawnLeft":"string",
+     "spawnRight":"string",
+     "spawnUp":"string"
     },
  "renderorder":"right-down",
  "tiledversion":"1.1.5",
@@ -88,7 +144,7 @@
          "margin":0,
          "name":"tiles",
          "spacing":0,
-         "tilecount":90,
+         "tilecount":961,
          "tileheight":16,
          "tileproperties":
             {
@@ -740,7 +796,7 @@
         }, 
         {
          "columns":0,
-         "firstgid":91,
+         "firstgid":962,
          "grid":
             {
              "height":1,
@@ -750,23 +806,44 @@
          "margin":0,
          "name":"objects",
          "spacing":0,
-         "tilecount":2,
+         "tilecount":5,
          "tileheight":16,
          "tiles":
             {
              "0":
                 {
-                 "image":"..\/sprites\/enemy.png",
+                 "image":"..\/..\/design\/sprites\/enemy.png",
                  "imageheight":16,
                  "imagewidth":16,
                  "type":"enemy"
                 },
              "1":
                 {
-                 "image":"..\/sprites\/player.png",
+                 "image":"..\/..\/design\/sprites\/player.png",
                  "imageheight":16,
                  "imagewidth":16,
-                 "type":"player"
+                 "type":"spawn"
+                },
+             "2":
+                {
+                 "image":"..\/..\/design\/sprites\/coins.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "type":"coins"
+                },
+             "3":
+                {
+                 "image":"..\/..\/design\/sprites\/heart.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "type":"heart"
+                },
+             "4":
+                {
+                 "image":"..\/..\/design\/sprites\/potion.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "type":"potion"
                 }
             },
          "tilewidth":16

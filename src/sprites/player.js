@@ -1,7 +1,7 @@
 export default class Player extends Phaser.GameObjects.Sprite {
   constructor(config) 
   {
-    super(config.scene, config.x, config.y, 'player');
+    super(config.scene, config.x, config.y, 'atlas', 'player');
     config.scene.physics.world.enable(this);
     this.scene = config.scene;
     this.input = this.scene.input.keyboard.createCursorKeys();
@@ -11,6 +11,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   update(time, delta) 
   {
+    this.scene.physics.overlap( this, this.scene.pickups, this.pickup);
 
     //movement
     this.body.setVelocity(0);
@@ -34,27 +35,35 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
 
 
-    //check if outside bounds, if out of bounds set load registry to appropriate value from map then tell the Level to reload
+    //check if outside bounds, if out of bounds set load and spawn registry to appropriate value from map then tell the Level to reload
     if (this.canLoad) 
     {
       if (this.x > this.scene.physics.world.bounds.width) {
         this.scene.registry.set('load', this.scene.map.properties.loadRight);
+        this.scene.registry.set('spawn', this.scene.map.properties.spawnRight);
         this.canLoad = false;
         this.scene.end();
       } else if (this.x < 0) {
         this.scene.registry.set('load', this.scene.map.properties.loadLeft);
+        this.scene.registry.set('spawn', this.scene.map.properties.spawnLeft);
         this.canLoad = false;
         this.scene.end();
       } else if (this.y > this.scene.physics.world.bounds.height) {
         this.scene.registry.set('load', this.scene.map.properties.loadDown);
+        this.scene.registry.set('spawn', this.scene.map.properties.spawnDown);
         this.canLoad = false;
         this.scene.end();
       } else if (this.y < 0) {
         this.scene.registry.set('load', this.scene.map.properties.loadUp);
+        this.scene.registry.set('spawn', this.scene.map.properties.spawnUp);
         this.canLoad = false;
         this.scene.end();
       }
     }
+  }
+
+  pickup(player, object) {
+    object.pickup();
   }
 
 }
