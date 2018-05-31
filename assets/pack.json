@@ -81,6 +81,16 @@
                 "type": "audio",
                 "key": "Level4Music",
                 "url": "assets/music/03-Whydothenationsrage.mp3"
+            },
+            {
+                "type": "tilemapTiledJSON",
+                "key": "Level5Map",
+                "url": "assets/maps/level5.json"
+            },
+            {
+                "type": "audio",
+                "key": "Level5Music",
+                "url": "assets/music/13Danger.mp3"
             }
 
         ]
