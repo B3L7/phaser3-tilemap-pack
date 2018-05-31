@@ -49,7 +49,7 @@ export default class Level extends Phaser.Scene {
 
     //tell the physics system to collide player, appropriate tiles, and other objects based on group, run callbacks when appropriate
     this.physics.add.collider(this.player, this.layer);
-    this.physics.add.collider(this.player, this.enemies);
+    this.physics.add.collider(this.player, this.enemies, this.playerEnemy);
     this.physics.add.collider(this.enemies, this.layer);
     this.physics.add.collider(this.enemies, this.enemies);
     this.physics.add.collider(this.playerAttack, this.layer, this.fireballWall);  //collide callback for fireball hitting wall
@@ -110,6 +110,10 @@ export default class Level extends Phaser.Scene {
           enemyNum += 1;
         }
       });
+  }
+
+  playerEnemy(player, enemy){
+    player.damage(enemy.attack);
   }
 
   fireballWall(fireball, wall)

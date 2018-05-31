@@ -6,8 +6,10 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.scene = config.scene;
     this.number = config.number;
     this.body.setDrag(8, 8);
+    this.body.setBounce(.5, .5);
     this.health = 4;
     this.alive = true;
+    this.attack = 1;
     this.damaged = false;
     this.playerDetected = false;
     this.detectionDistance = 64;

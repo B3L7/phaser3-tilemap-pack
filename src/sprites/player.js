@@ -7,6 +7,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     config.scene.physics.world.enable(this);
     this.scene = config.scene;
     this.body.setDrag(8, 8);
+    this.body.setBounce(.5, .5);
     this.alive = true;
     this.damaged = false;
     this.input = this.scene.input.keyboard.createCursorKeys();
@@ -37,7 +38,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.scene.physics.overlap( this, this.scene.pickups, this.pickup); //call pickup method when player overlaps pickup objects
 
     //movement
-    this.body.setVelocity(0);
+    if (!this.damaged) {
+      this.body.setVelocity(0);
+    }
 
     if (this.input.left.isDown)
     {
@@ -87,6 +90,22 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   pickup(player, object) {
     object.pickup();  //call the pickup objects method
+  }
+
+  damage(ammount) {
+    if (!this.damaged) {
+      this.damaged = true;
+      let health = this.scene.registry.get('health_current'); //find out the player's current health
+      this.scene.registry.set('health_current', health - ammount);  //update the player's current health
+      this.scene.events.emit('healthChange'); //tell the scene the health has changed so the HUD is updated
+      this.setTint(0x8e2f15);
+      this.scene.time.addEvent({ delay: 1000, callback: this.normalize, callbackScope: this });
+    }
+  }
+
+  normalize() {
+    this.damaged = false;
+    this.setTint(0xffffff);
   }
 
 }

@@ -47,6 +47,8 @@ export default class Preload extends Phaser.Scene {
     //Here we store our key that tells the LevelScene what map to load.
     this.registry.set('health_max', 4);
     this.registry.set('health_current', 4);
+    this.registry.set('magic_max', 20);
+    this.registry.set('magic_current', 20);
     this.registry.set('coins_max', 4);
     this.registry.set('coins_current', 0);
     this.registry.set('load', 'Level1');
