@@ -7,6 +7,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
     config.scene.physics.world.enable(this);
     this.scene = config.scene;
     this.body.setDrag(8, 8);
+    this.alive = true;
+    this.damaged = false;
     this.input = this.scene.input.keyboard.createCursorKeys();
     this.canLoad = true;  //property controls whether the level can restart so that it can only be called once
 
