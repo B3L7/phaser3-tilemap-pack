@@ -1,11 +1,27 @@
+import Fireball from './fireball'
+
 export default class Player extends Phaser.GameObjects.Sprite {
   constructor(config) 
   {
     super(config.scene, config.x, config.y, 'atlas', 'player');
     config.scene.physics.world.enable(this);
     this.scene = config.scene;
+    this.body.setDrag(8, 8);
     this.input = this.scene.input.keyboard.createCursorKeys();
     this.canLoad = true;
+    this.scene.input.on('pointermove', function (pointer) {
+      this.scene.crosshair.x = pointer.x;
+      this.scene.crosshair.y = pointer.y;
+    }, this);
+  
+    this.scene.input.on('pointerdown', function (pointer) {
+      let fireball = new Fireball({
+        scene: this.scene,
+        x: this.x, 
+        y: this.y,
+      });
+      this.scene.playerAttack.add(fireball);
+    }, this);
     this.scene.add.existing(this);
   }
 

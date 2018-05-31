@@ -37,16 +37,22 @@ export default class Level extends Phaser.Scene {
 
     let spawn = this.spawnpoints[this.registry.get('spawn')];
 
+    this.crosshair = this.add.image(0, 0, 'atlas', 'crosshair');
     this.player = new Player({
         scene: this,
         x: spawn.x, 
         y: spawn.y,
       });
+    this.playerAttack = this.add.group(null);
+    this.playerAttack.runChildUpdate = true;
 
     //tell the physics system to collide player, appropriate tiles, and other objects based on group
     this.physics.add.collider(this.player, this.layer);
     this.physics.add.collider(this.player, this.enemies);
     this.physics.add.collider(this.enemies, this.layer);
+    this.physics.add.collider(this.playerAttack, this.layer, this.fireballWall);
+    this.physics.add.collider(this.playerAttack, this.enemies, this.fireballEnemy);
+
   }
 
   update (time, delta) 
@@ -60,6 +66,8 @@ export default class Level extends Phaser.Scene {
     const objects = this.map.getObjectLayer('objects');
     const level = this.registry.get('load');
     let coinNum = 1;
+    let enemyNum = 1;
+    let regName
     objects.objects.forEach(
       (object) => {
         if (object.type === 'spawn') {
@@ -69,10 +77,9 @@ export default class Level extends Phaser.Scene {
           }
         }
         if (object.type === 'coins') {
-          let coins;
-          let regName = `${level}_Coins_${coinNum}`;
+          regName = `${level}_Coins_${coinNum}`;
           if (this.registry.get(regName) !== 'picked') {
-            coins = new Coins({
+            let coins = new Coins({
               scene: this,
               x: object.x + 8, 
               y: object.y - 8,
@@ -84,14 +91,30 @@ export default class Level extends Phaser.Scene {
           coinNum += 1;
         }
         if (object.type === "enemy") {
-          let enemy = new Enemy({
-          scene: this,
-          x: object.x + 8, 
-          y: object.y - 8,
-          });
-          this.enemies.add(enemy);
+          regName = `${level}_Enemies_${enemyNum}`;
+          if (this.registry.get(regName) !== 'dead') {
+            let enemy = new Enemy({
+            scene: this,
+            x: object.x + 8, 
+            y: object.y - 8,
+            number: enemyNum
+            });
+            this.enemies.add(enemy);
+            this.registry.set(regName, 'active');
+          }
+          enemyNum += 1;
         }
       });
+  }
+
+  fireballWall(fireball, wall)
+  {
+    fireball.wallCollide();
+  }
+
+  fireballEnemy(fireball, enemy)
+  {
+    fireball.enemyCollide(enemy);
   }
 
   end()

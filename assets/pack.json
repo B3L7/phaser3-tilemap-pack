@@ -23,6 +23,26 @@
                 "url": "assets/sfx/sfx_coin_double2.wav"
             },
             {
+                "type": "audio",
+                "key": "enemyDeathSFX",
+                "url": "assets/sfx/sfx_deathscream_alien3.wav"
+            },
+            {
+                "type": "audio",
+                "key": "fireballSFX",
+                "url": "assets/sfx/sfx_wpn_laser9.wav"
+            },
+            {
+                "type": "audio",
+                "key": "fireballWallSFX",
+                "url": "assets/sfx/sfx_exp_short_soft11.wav"
+            },
+            {
+                "type": "audio",
+                "key": "fireballEnemySFX",
+                "url": "assets/sfx/sfx_exp_short_hard14.wav"
+            },
+            {
                 "type": "tilemapTiledJSON",
                 "key": "Level1Map",
                 "url": "assets/maps/level1.json"

@@ -4,6 +4,8 @@ import Preload from './scenes/Preload';
 import Level from './scenes/Level';
 import HUD from './scenes/HUD';
 
+document.body.style.cursor = 'none';
+
 const config = {
     type: Phaser.AUTO,
     parent: 'phaser-tilemap-pack',
