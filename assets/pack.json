@@ -61,6 +61,26 @@
                 "type": "audio",
                 "key": "Level2Music",
                 "url": "assets/music/15-Dungeon.mp3"
+            },
+              {
+                "type": "tilemapTiledJSON",
+                "key": "Level3Map",
+                "url": "assets/maps/level3.json"
+            },
+            {
+                "type": "audio",
+                "key": "Level3Music",
+                "url": "assets/music/06-RebelsBe.mp3"
+            },
+            {
+                "type": "tilemapTiledJSON",
+                "key": "Level4Map",
+                "url": "assets/maps/level4.json"
+            },
+            {
+                "type": "audio",
+                "key": "Level4Music",
+                "url": "assets/music/03-Whydothenationsrage.mp3"
             }
 
         ]
