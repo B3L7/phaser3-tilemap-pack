@@ -18,7 +18,7 @@
          "name":"objects",
          "objects":[
                 {
-                 "gid":963,
+                 "gid":112,
                  "height":16,
                  "id":1,
                  "name":"spawnCenter",
@@ -30,7 +30,7 @@
                  "y":480
                 }, 
                 {
-                 "gid":962,
+                 "gid":111,
                  "height":16,
                  "id":2,
                  "name":"",
@@ -42,7 +42,7 @@
                  "y":400
                 }, 
                 {
-                 "gid":962,
+                 "gid":111,
                  "height":16,
                  "id":3,
                  "name":"",
@@ -54,7 +54,7 @@
                  "y":352
                 }, 
                 {
-                 "gid":963,
+                 "gid":112,
                  "height":16,
                  "id":4,
                  "name":"spawnDown",
@@ -66,7 +66,7 @@
                  "y":608
                 }, 
                 {
-                 "gid":964,
+                 "gid":113,
                  "height":16,
                  "id":5,
                  "name":"",
@@ -78,7 +78,7 @@
                  "y":384
                 }, 
                 {
-                 "gid":964,
+                 "gid":113,
                  "height":16,
                  "id":6,
                  "name":"",
@@ -90,7 +90,7 @@
                  "y":464
                 }, 
                 {
-                 "gid":964,
+                 "gid":113,
                  "height":16,
                  "id":7,
                  "name":"",
@@ -100,6 +100,30 @@
                  "width":16,
                  "x":336,
                  "y":368
+                }, 
+                {
+                 "gid":116,
+                 "height":16,
+                 "id":8,
+                 "name":"",
+                 "rotation":0,
+                 "type":"meat",
+                 "visible":true,
+                 "width":16,
+                 "x":448,
+                 "y":480
+                }, 
+                {
+                 "gid":116,
+                 "height":16,
+                 "id":9,
+                 "name":"",
+                 "rotation":0,
+                 "type":"meat",
+                 "visible":true,
+                 "width":16,
+                 "x":240,
+                 "y":368
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -107,7 +131,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":8,
+ "nextobjectid":10,
  "orientation":"orthogonal",
  "properties":
     {
@@ -139,12 +163,12 @@
          "columns":10,
          "firstgid":1,
          "image":"..\/tiles\/tiles.png",
-         "imageheight":144,
-         "imagewidth":160,
-         "margin":0,
+         "imageheight":162,
+         "imagewidth":180,
+         "margin":1,
          "name":"tiles",
-         "spacing":0,
-         "tilecount":961,
+         "spacing":2,
+         "tilecount":110,
          "tileheight":16,
          "tileproperties":
             {
@@ -796,7 +820,7 @@
         }, 
         {
          "columns":0,
-         "firstgid":962,
+         "firstgid":111,
          "grid":
             {
              "height":1,
@@ -806,7 +830,7 @@
          "margin":0,
          "name":"objects",
          "spacing":0,
-         "tilecount":5,
+         "tilecount":6,
          "tileheight":16,
          "tiles":
             {
@@ -844,6 +868,13 @@
                  "imageheight":16,
                  "imagewidth":16,
                  "type":"potion"
+                },
+             "5":
+                {
+                 "image":"..\/..\/design\/sprites\/meat.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "type":"meat"
                 }
             },
          "tilewidth":16

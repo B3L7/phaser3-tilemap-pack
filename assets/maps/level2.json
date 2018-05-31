@@ -18,7 +18,7 @@
          "name":"objects",
          "objects":[
                 {
-                 "gid":92,
+                 "gid":112,
                  "height":16,
                  "id":1,
                  "name":"spawnUp",
@@ -30,7 +30,7 @@
                  "y":16
                 }, 
                 {
-                 "gid":91,
+                 "gid":111,
                  "height":16,
                  "id":2,
                  "name":"",
@@ -42,7 +42,7 @@
                  "y":352
                 }, 
                 {
-                 "gid":91,
+                 "gid":111,
                  "height":16,
                  "id":3,
                  "name":"",
@@ -54,7 +54,7 @@
                  "y":256
                 }, 
                 {
-                 "gid":91,
+                 "gid":111,
                  "height":16,
                  "id":4,
                  "name":"",
@@ -66,7 +66,7 @@
                  "y":416
                 }, 
                 {
-                 "gid":91,
+                 "gid":111,
                  "height":16,
                  "id":5,
                  "name":"",
@@ -78,7 +78,7 @@
                  "y":448
                 }, 
                 {
-                 "gid":92,
+                 "gid":112,
                  "height":16,
                  "id":6,
                  "name":"spawnRight",
@@ -90,7 +90,7 @@
                  "y":352
                 }, 
                 {
-                 "gid":92,
+                 "gid":112,
                  "height":16,
                  "id":7,
                  "name":"spawnDown",
@@ -102,7 +102,7 @@
                  "y":608
                 }, 
                 {
-                 "gid":92,
+                 "gid":112,
                  "height":16,
                  "id":8,
                  "name":"spawnLeft",
@@ -114,7 +114,7 @@
                  "y":352
                 }, 
                 {
-                 "gid":93,
+                 "gid":113,
                  "height":16,
                  "id":9,
                  "name":"",
@@ -126,7 +126,7 @@
                  "y":288
                 }, 
                 {
-                 "gid":93,
+                 "gid":113,
                  "height":16,
                  "id":10,
                  "name":"",
@@ -138,7 +138,7 @@
                  "y":272
                 }, 
                 {
-                 "gid":93,
+                 "gid":113,
                  "height":16,
                  "id":11,
                  "name":"",
@@ -150,7 +150,7 @@
                  "y":384
                 }, 
                 {
-                 "gid":93,
+                 "gid":113,
                  "height":16,
                  "id":12,
                  "name":"",
@@ -199,12 +199,12 @@
          "columns":10,
          "firstgid":1,
          "image":"..\/tiles\/tiles.png",
-         "imageheight":144,
-         "imagewidth":160,
-         "margin":0,
+         "imageheight":162,
+         "imagewidth":180,
+         "margin":1,
          "name":"tiles",
-         "spacing":0,
-         "tilecount":90,
+         "spacing":2,
+         "tilecount":110,
          "tileheight":16,
          "tileproperties":
             {
@@ -856,7 +856,7 @@
         }, 
         {
          "columns":0,
-         "firstgid":91,
+         "firstgid":111,
          "grid":
             {
              "height":1,

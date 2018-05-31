@@ -1,6 +1,7 @@
 import Player from '../sprites/player';
 import Enemy from '../sprites/enemy';
 import Coins from '../sprites/coins';
+import Meat from '../sprites/meat';
 
 export default class Level extends Phaser.Scene {
   constructor() 
@@ -30,9 +31,9 @@ export default class Level extends Phaser.Scene {
 
     this.spawnpoints = [];  //create an array to hold the spawnpoints populated by converObjects()
     //set up groups, tell group to run updates on its children, then call the object conversion method
-    this.pickups = this.add.group(null);
     this.enemies = this.add.group(null);
     this.enemies.runChildUpdate = true;
+    this.pickups = this.add.group(null);
     this.convertObjects();
 
     let spawn = this.spawnpoints[this.registry.get('spawn')]; //assign spawn variable that points to the currently loaded spawnpoint
@@ -68,6 +69,7 @@ export default class Level extends Phaser.Scene {
     const objects = this.map.getObjectLayer('objects'); //find the object layer in the tilemap named 'objects'
     const level = this.registry.get('load');
     let coinNum = 1;  //initialize our coin numbering used to check if the coin has been picked up
+    let meatNum = 1;  //initialize our meat numbering used to check if the meat has been picked up
     let enemyNum = 1; //initialize our enemy numbering used to check if the enemy has been killed
     let regName
     objects.objects.forEach(
@@ -90,6 +92,21 @@ export default class Level extends Phaser.Scene {
               number: coinNum
               });
               this.pickups.add(coins);
+              this.registry.set(regName, 'active');
+            }
+          coinNum += 1;
+        }
+        if (object.type === 'meat') {
+          //check the registry to see if the coin has already been picked. If not create the coin in the level and register it with the game
+          regName = `${level}_Meat_${meatNum}`;
+          if (this.registry.get(regName) !== 'picked') {
+            let meat = new Meat({
+              scene: this,
+              x: object.x + 8, 
+              y: object.y - 8,
+              number: meatNum
+              });
+              this.pickups.add(meat);
               this.registry.set(regName, 'active');
             }
           coinNum += 1;

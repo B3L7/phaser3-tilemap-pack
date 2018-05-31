@@ -14,6 +14,8 @@ We need [Node.js](https://nodejs.org) to install and run scripts.
 
 [Leshy Spritetool](https://www.leshylabs.com/apps/sstool/) used to make atlas.
 
+[Tile Extruder](https://github.com/sporadic-labs/tile-extruder) to extrude tileset and prevent bleed.
+
 ## Install and run
 
 Run next commands in your terminal:

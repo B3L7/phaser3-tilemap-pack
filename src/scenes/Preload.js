@@ -13,6 +13,9 @@ export default class Preload extends Phaser.Scene {
     this.bg.clear();
     this.bg.fillStyle(0x2a0503, 1);
     this.bg.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height);
+    this.fullBar = this.add.graphics();
+    this.fullBar.fillStyle(0xda7a34, 1);
+    this.fullBar.fillRect(198, 298, 404, 34);
     this.progress = this.add.graphics();
 
     //pass loading progress as value to loading bar and redraw as files load
@@ -25,6 +28,7 @@ export default class Preload extends Phaser.Scene {
     //cleanup our graphics on complete
     this.load.on('complete', function () {
         this.progress.destroy();
+        this.fullBar.destroy();
         this.bg.destroy();
 
     }, this);

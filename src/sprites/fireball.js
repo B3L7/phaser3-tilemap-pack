@@ -14,21 +14,28 @@ export default class Fireball extends Phaser.GameObjects.Sprite {
     this.enemySound.setVolume(.1);
     this.scene.add.existing(this);
     this.scene.physics.moveTo(this, this.scene.crosshair.x, this.scene.crosshair.y);
+    this.particles = this.scene.add.particles('atlas', 'whiteParticle');
+    this.emitter = this.particles.createEmitter();
+    this.emitter.setPosition(this.x, this.y);
+    this.emitter.setSpeed(16);
+    this.emitter.setBlendMode(Phaser.BlendModes.ADD);
   }
 
   update(time, delta) 
   {
-    
+    this.emitter.setPosition(this.x, this.y);
   }
 
   wallCollide () 
   {
+    this.emitter.explode( 64, this.x, this.y );
     this.wallSound.play();
     this.destroy();
   }
 
   enemyCollide (enemy) 
   {
+    this.emitter.explode( 32, this.x, this.y );
     this.enemySound.play();
     enemy.damage(this.damage);
     this.destroy();

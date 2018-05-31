@@ -21,12 +21,17 @@ export default class Player extends Phaser.GameObjects.Sprite {
   
     //create a new instance of fireball class when pointer is clicked and add it to player attack group for collision callbacks
     this.scene.input.on('pointerdown', function (pointer) {
-      let fireball = new Fireball({
-        scene: this.scene,
-        x: this.x, 
-        y: this.y,
-      });
-      this.scene.playerAttack.add(fireball);
+      let magic = this.scene.registry.get('magic_current');
+      if (magic > 0) {
+        let fireball = new Fireball({
+          scene: this.scene,
+          x: this.x, 
+          y: this.y,
+        });
+        this.scene.playerAttack.add(fireball);
+        this.scene.registry.set('magic_current', magic - 1);
+        this.scene.events.emit('magicChange'); //tell the scene the magic has changed so the HUD is updated
+      }
     }, this);
 
 
@@ -94,6 +99,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   damage(ammount) {
     if (!this.damaged) {
+      this.scene.cameras.main.shake(32);
       this.damaged = true;
       let health = this.scene.registry.get('health_current'); //find out the player's current health
       this.scene.registry.set('health_current', health - ammount);  //update the player's current health
