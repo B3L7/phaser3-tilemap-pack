@@ -44,7 +44,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
 
   die()
   {
-    this.scene.registry.set(`${this.scene.registry.get('load')}_Enemies_${this.number}`, 'dead');
+    this.scene.registry.set(`${this.scene.registry.get('load')}_Enemies_${this.number}`, 'dead'); //register this enemy as dead so it is not added to future instances of this level.
     this.destroy();
   }
   

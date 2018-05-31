@@ -4,7 +4,7 @@ import Preload from './scenes/Preload';
 import Level from './scenes/Level';
 import HUD from './scenes/HUD';
 
-document.body.style.cursor = 'none';
+document.body.style.cursor = 'none';    //remove cursor so we can replace it with our crosshair
 
 const config = {
     type: Phaser.AUTO,

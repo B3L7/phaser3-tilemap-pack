@@ -1,6 +1,6 @@
-import Player from '../sprites/player'
-import Enemy from '../sprites/enemy'
-import Coins from '../sprites/coins'
+import Player from '../sprites/player';
+import Enemy from '../sprites/enemy';
+import Coins from '../sprites/coins';
 
 export default class Level extends Phaser.Scene {
   constructor() 
@@ -35,41 +35,43 @@ export default class Level extends Phaser.Scene {
     this.enemies.runChildUpdate = true;
     this.convertObjects();
 
-    let spawn = this.spawnpoints[this.registry.get('spawn')];
+    let spawn = this.spawnpoints[this.registry.get('spawn')]; //assign spawn variable that points to the currently loaded spawnpoint
 
-    this.crosshair = this.add.image(0, 0, 'atlas', 'crosshair');
+    this.crosshair = this.add.image(0, 0, 'atlas', 'crosshair');  //create crosshair which is controlled by player class
+    //create a new instance of the player class at the currently loaded spawnpoint
     this.player = new Player({
         scene: this,
         x: spawn.x, 
         y: spawn.y,
       });
-    this.playerAttack = this.add.group(null);
+    this.playerAttack = this.add.group(null); //create attack group to hold player's fireballs
     this.playerAttack.runChildUpdate = true;
 
-    //tell the physics system to collide player, appropriate tiles, and other objects based on group
+    //tell the physics system to collide player, appropriate tiles, and other objects based on group, run callbacks when appropriate
     this.physics.add.collider(this.player, this.layer);
     this.physics.add.collider(this.player, this.enemies);
     this.physics.add.collider(this.enemies, this.layer);
-    this.physics.add.collider(this.playerAttack, this.layer, this.fireballWall);
-    this.physics.add.collider(this.playerAttack, this.enemies, this.fireballEnemy);
+    this.physics.add.collider(this.playerAttack, this.layer, this.fireballWall);  //collide callback for fireball hitting wall
+    this.physics.add.collider(this.playerAttack, this.enemies, this.fireballEnemy); //collide callback for fireball hitting enemy
 
   }
 
   update (time, delta) 
   {
-    this.player.update(time, delta);
+    this.player.update(time, delta);  //the player class update method must be called each cycle as the class is not currently part of a group
   }
 
   convertObjects() 
   {
     //objects in map are checked by type(assigned in object layer in Tiled) and the appopriate extended sprite is created
-    const objects = this.map.getObjectLayer('objects');
+    const objects = this.map.getObjectLayer('objects'); //find the object layer in the tilemap named 'objects'
     const level = this.registry.get('load');
-    let coinNum = 1;
-    let enemyNum = 1;
+    let coinNum = 1;  //initialize our coin numbering used to check if the coin has been picked up
+    let enemyNum = 1; //initialize our enemy numbering used to check if the enemy has been killed
     let regName
     objects.objects.forEach(
       (object) => {
+        //create a series of points in our spawnpoints array
         if (object.type === 'spawn') {
           this.spawnpoints[object.name] = {
             x: object.x + 8,
@@ -77,6 +79,7 @@ export default class Level extends Phaser.Scene {
           }
         }
         if (object.type === 'coins') {
+          //check the registry to see if the coin has already been picked. If not create the coin in the level and register it with the game
           regName = `${level}_Coins_${coinNum}`;
           if (this.registry.get(regName) !== 'picked') {
             let coins = new Coins({
@@ -91,6 +94,7 @@ export default class Level extends Phaser.Scene {
           coinNum += 1;
         }
         if (object.type === "enemy") {
+          //check the registry to see if the enemy has already been killed. If not create the enemy in the level and register it with the game
           regName = `${level}_Enemies_${enemyNum}`;
           if (this.registry.get(regName) !== 'dead') {
             let enemy = new Enemy({

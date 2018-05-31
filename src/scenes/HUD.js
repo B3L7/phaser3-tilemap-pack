@@ -13,7 +13,7 @@ export default class HUD extends Phaser.Scene {
     this.coins.setOrigin(1, 0);
 
     const level = this.scene.get('Level');
-    level.events.on('coinChange', this.updateCoins, this);
+    level.events.on('coinChange', this.updateCoins, this);  //watch the level to see if the coin count has changed. Event emitted by coin class.
     
 
   }

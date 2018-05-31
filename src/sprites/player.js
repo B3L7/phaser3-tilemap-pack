@@ -1,4 +1,4 @@
-import Fireball from './fireball'
+import Fireball from './fireball';
 
 export default class Player extends Phaser.GameObjects.Sprite {
   constructor(config) 
@@ -8,12 +8,15 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.scene = config.scene;
     this.body.setDrag(8, 8);
     this.input = this.scene.input.keyboard.createCursorKeys();
-    this.canLoad = true;
+    this.canLoad = true;  //property controls whether the level can restart so that it can only be called once
+
+    //sync crosshair position with pointer
     this.scene.input.on('pointermove', function (pointer) {
       this.scene.crosshair.x = pointer.x;
       this.scene.crosshair.y = pointer.y;
     }, this);
   
+    //create a new instance of fireball class when pointer is clicked and add it to player attack group for collision callbacks
     this.scene.input.on('pointerdown', function (pointer) {
       let fireball = new Fireball({
         scene: this.scene,
@@ -22,12 +25,14 @@ export default class Player extends Phaser.GameObjects.Sprite {
       });
       this.scene.playerAttack.add(fireball);
     }, this);
+
+
     this.scene.add.existing(this);
   }
 
   update(time, delta) 
   {
-    this.scene.physics.overlap( this, this.scene.pickups, this.pickup);
+    this.scene.physics.overlap( this, this.scene.pickups, this.pickup); //call pickup method when player overlaps pickup objects
 
     //movement
     this.body.setVelocity(0);
@@ -79,7 +84,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   pickup(player, object) {
-    object.pickup();
+    object.pickup();  //call the pickup objects method
   }
 
 }
