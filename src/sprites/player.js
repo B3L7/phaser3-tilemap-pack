@@ -19,6 +19,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.hurtSound = this.scene.sound.add('playerDamageSFX');
     this.hurtSound.setVolume(.4);
 
+    this.deathSound = this.scene.sound.add('playerDeathSFX');
+    this.deathSound.setVolume(.4);
+
     //sync crosshair position with pointer
     this.scene.input.on('pointermove', function (pointer) {
       this.scene.crosshair.x = pointer.x;
@@ -48,64 +51,76 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   update(time, delta) 
   {
-    this.scene.physics.overlap( this, this.scene.pickups, this.pickup); //call pickup method when player overlaps pickup objects
+    if (this.alive) {
+      let healthCurrent = this.scene.registry.get('health_current');
+      if (healthCurrent <= 0) {
+        this.alive = false;
+        this.setTint(0x2a0503);
+        this.deathSound.play();
+        this.scene.time.addEvent({ delay: 1000, callback: this.gameOver, callbackScope: this });
+      }
 
-    //movement
-    if (!this.damaged) {
-      this.body.setVelocity(0);
-    }
+      this.scene.physics.overlap( this, this.scene.pickups, this.pickup); //call pickup method when player overlaps pickup objects
 
-    if (this.input.left.isDown)
-    {
-        this.body.setVelocityX(-64);
-    }
-    else if (this.input.right.isDown)
-    {
-        this.body.setVelocityX(64);
-    }
+      //movement
+      if (!this.damaged) {
+        this.body.setVelocity(0);
+      }
 
-    if (this.input.up.isDown)
-    {
-        this.body.setVelocityY(-64);
-    }
-    else if (this.input.down.isDown)
-    {
-        this.body.setVelocityY(64);
-    }
+      if (this.input.left.isDown)
+      {
+          this.body.setVelocityX(-64);
+      }
+      else if (this.input.right.isDown)
+      {
+          this.body.setVelocityX(64);
+      }
+
+      if (this.input.up.isDown)
+      {
+          this.body.setVelocityY(-64);
+      }
+      else if (this.input.down.isDown)
+      {
+          this.body.setVelocityY(64);
+      }
 
 
-    //check if outside bounds, if out of bounds set load and spawn registry to appropriate value from map then tell the Level to reload
-    if (this.canLoad) 
-    {
-      if (this.x > this.scene.physics.world.bounds.width) {
-        this.scene.registry.set('load', this.scene.map.properties.loadRight);
-        this.scene.registry.set('spawn', this.scene.map.properties.spawnRight);
-        this.canLoad = false;
-        this.scene.end();
-      } else if (this.x < 0) {
-        this.scene.registry.set('load', this.scene.map.properties.loadLeft);
-        this.scene.registry.set('spawn', this.scene.map.properties.spawnLeft);
-        this.canLoad = false;
-        this.scene.end();
-      } else if (this.y > this.scene.physics.world.bounds.height) {
-        this.scene.registry.set('load', this.scene.map.properties.loadDown);
-        this.scene.registry.set('spawn', this.scene.map.properties.spawnDown);
-        this.canLoad = false;
-        this.scene.end();
-      } else if (this.y < 0) {
-        this.scene.registry.set('load', this.scene.map.properties.loadUp);
-        this.scene.registry.set('spawn', this.scene.map.properties.spawnUp);
-        this.canLoad = false;
-        this.scene.end();
+      //check if outside bounds, if out of bounds set load and spawn registry to appropriate value from map then tell the Level to reload
+      if (this.canLoad) 
+      {
+        if (this.x > this.scene.physics.world.bounds.width) {
+          this.scene.registry.set('load', this.scene.map.properties.loadRight);
+          this.scene.registry.set('spawn', this.scene.map.properties.spawnRight);
+          this.canLoad = false;
+          this.scene.end('restart');
+        } else if (this.x < 0) {
+          this.scene.registry.set('load', this.scene.map.properties.loadLeft);
+          this.scene.registry.set('spawn', this.scene.map.properties.spawnLeft);
+          this.canLoad = false;
+          this.scene.end('restart');
+        } else if (this.y > this.scene.physics.world.bounds.height) {
+          this.scene.registry.set('load', this.scene.map.properties.loadDown);
+          this.scene.registry.set('spawn', this.scene.map.properties.spawnDown);
+          this.canLoad = false;
+          this.scene.end('restart');
+        } else if (this.y < 0) {
+          this.scene.registry.set('load', this.scene.map.properties.loadUp);
+          this.scene.registry.set('spawn', this.scene.map.properties.spawnUp);
+          this.canLoad = false;
+          this.scene.end('restart');
+        }
       }
     }
   }
 
-  pickup(player, object) {
+  pickup(player, object) 
+  {
     object.pickup();  //call the pickup objects method
   }
 
-  damage(ammount) {
+  damage(ammount) 
+  {
     if (!this.damaged) {
       this.hurtSound.play();
       this.scene.cameras.main.shake(32);
@@ -118,9 +133,17 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
   }
 
-  normalize() {
-    this.damaged = false;
-    this.setTint(0xffffff);
+  gameOver()
+  {
+    this.scene.end('gameOver');
+  }
+
+  normalize() 
+  {
+    if (this.alive) {
+      this.damaged = false;
+      this.setTint(0xffffff);
+    }
   }
 
 }

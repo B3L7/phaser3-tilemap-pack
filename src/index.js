@@ -3,6 +3,7 @@ import 'phaser';
 import Preload from './scenes/Preload';
 import Level from './scenes/Level';
 import HUD from './scenes/HUD';
+import GameOver from './scenes/gameOver';
 
 document.body.style.cursor = 'none';    //remove cursor so we can replace it with our crosshair
 
@@ -19,7 +20,8 @@ const config = {
     scene: [
         Preload,
         Level,
-        HUD
+        HUD,
+        GameOver
     ]
 };
 

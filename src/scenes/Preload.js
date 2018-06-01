@@ -9,10 +9,7 @@ export default class Preload extends Phaser.Scene {
   preload()
   {
     //create a background and prepare loading bar
-    this.bg = this.add.graphics();
-    this.bg.clear();
-    this.bg.fillStyle(0x2a0503, 1);
-    this.bg.fillRect(0, 0, this.cameras.main.width, this.cameras.main.height);
+    this.cameras.main.setBackgroundColor(0x2a0503);
     this.fullBar = this.add.graphics();
     this.fullBar.fillStyle(0xda7a34, 1);
     this.fullBar.fillRect(126, 214, 260, 20);
@@ -29,8 +26,6 @@ export default class Preload extends Phaser.Scene {
     this.load.on('complete', function () {
         this.progress.destroy();
         this.fullBar.destroy();
-        this.bg.destroy();
-
     }, this);
 
     //start loading

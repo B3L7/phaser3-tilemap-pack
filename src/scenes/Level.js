@@ -196,11 +196,21 @@ export default class Level extends Phaser.Scene {
     fireball.enemyCollide(enemy);
   }
 
-  end()
+  end(type)
   {
     //restart the scene. You can place additional cleanup functions in here
     this.music.stop();
-    this.scene.restart();
+    if (type === 'restart') {
+      this.scene.restart();
+    } else if (type === 'gameOver') {
+      this.cameras.main.fade(1000, 16.5, 2.0, 1.2);
+      this.events.emit('gameOver');
+      this.time.addEvent({ delay: 1000, callback: this.overTransistion, callbackScope: this });
+    }
+  }
+
+  overTransistion() {
+    this.scene.start('GameOver');
   }
 
 }

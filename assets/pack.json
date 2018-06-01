@@ -52,7 +52,12 @@
                 "key": "playerDamageSFX",
                 "url": "assets/sfx/sfx_sounds_damage1.wav"
             },
-             {
+            {
+                "type": "audio",
+                "key": "playerDeathSFX",
+                "url": "assets/sfx/sfx_deathscream_human3.wav"
+            },
+            {
                 "type": "audio",
                 "key": "lowHealthSFX",
                 "url": "assets/sfx/sfx_lowhealth_alarmloop7.wav"
@@ -126,6 +131,16 @@
                 "type": "audio",
                 "key": "Level5Music",
                 "url": "assets/music/13Danger.mp3"
+            },
+            {
+                "type": "audio",
+                "key": "overMusic",
+                "url": "assets/music/20-GameOver.mp3"
+            },
+            {
+                "type": "audio",
+                "key": "winMusic",
+                "url": "assets/music/25-Finale.mp3"
             }
 
         ]

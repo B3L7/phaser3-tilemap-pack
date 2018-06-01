@@ -23,6 +23,7 @@ export default class HUD extends Phaser.Scene {
     level.events.on('healthChange', this.updateHealth, this);  //watch the level to see if the coin health has changed. Event emitted by player and meat class.
     level.events.on('magicChange', this.updateMagic, this);  //watch the level to see if the coin magic has changed. Event emitted by player and potion class.
     
+    level.events.on('gameOver', this.gameOver, this); //watch for Game Over
 
   }
 
@@ -46,6 +47,14 @@ export default class HUD extends Phaser.Scene {
   updateMagic() 
   {
     this.magic.setText(`Magic: ${this.registry.get('magic_current')} / ${this.registry.get('magic_max')}`);
+  }
+
+  gameOver()
+  {
+    this.healthAlarm.stop();
+    this.health.destroy();
+    this.magic.destroy();
+    this.coins.destroy();
   }
 
 }
