@@ -24,13 +24,38 @@
             },
             {
                 "type": "audio",
+                "key": "meatSFX",
+                "url": "assets/sfx/sfx_sounds_interaction1.wav"
+            },
+            {
+                "type": "audio",
+                "key": "potionSFX",
+                "url": "assets/sfx/sfx_sounds_interaction12.wav"
+            },
+            {
+                "type": "audio",
                 "key": "enemyDeathSFX",
                 "url": "assets/sfx/sfx_deathscream_alien3.wav"
             },
             {
                 "type": "audio",
+                "key": "playerDamageSFX",
+                "url": "assets/sfx/sfx_sounds_damage1.wav"
+            },
+             {
+                "type": "audio",
+                "key": "lowHealthSFX",
+                "url": "assets/sfx/sfx_lowhealth_alarmloop7.wav"
+            },
+            {
+                "type": "audio",
                 "key": "fireballSFX",
                 "url": "assets/sfx/sfx_wpn_laser9.wav"
+            },
+            {
+                "type": "audio",
+                "key": "outOfMagicSFX",
+                "url": "assets/sfx/sfx_sounds_error10.wav"
             },
             {
                 "type": "audio",

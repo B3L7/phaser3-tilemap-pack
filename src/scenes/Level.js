@@ -2,6 +2,7 @@ import Player from '../sprites/player';
 import Enemy from '../sprites/enemy';
 import Coins from '../sprites/coins';
 import Meat from '../sprites/meat';
+import Potion from '../sprites/potion';
 
 export default class Level extends Phaser.Scene {
   constructor() 
@@ -70,6 +71,7 @@ export default class Level extends Phaser.Scene {
     const level = this.registry.get('load');
     let coinNum = 1;  //initialize our coin numbering used to check if the coin has been picked up
     let meatNum = 1;  //initialize our meat numbering used to check if the meat has been picked up
+    let potNum = 1;  //initialize our potion numbering used to check if the meat has been picked up
     let enemyNum = 1; //initialize our enemy numbering used to check if the enemy has been killed
     let regName
     objects.objects.forEach(
@@ -97,7 +99,7 @@ export default class Level extends Phaser.Scene {
           coinNum += 1;
         }
         if (object.type === 'meat') {
-          //check the registry to see if the coin has already been picked. If not create the coin in the level and register it with the game
+          //check the registry to see if the meat has already been picked. If not create the meat in the level and register it with the game
           regName = `${level}_Meat_${meatNum}`;
           if (this.registry.get(regName) !== 'picked') {
             let meat = new Meat({
@@ -107,6 +109,21 @@ export default class Level extends Phaser.Scene {
               number: meatNum
               });
               this.pickups.add(meat);
+              this.registry.set(regName, 'active');
+            }
+          coinNum += 1;
+        }
+        if (object.type === 'potion') {
+          //check the registry to see if the potion has already been picked. If not create the potion in the level and register it with the game
+          regName = `${level}_Potion_${potNum}`;
+          if (this.registry.get(regName) !== 'picked') {
+            let potion = new Potion({
+              scene: this,
+              x: object.x + 8, 
+              y: object.y - 8,
+              number: potNum
+              });
+              this.pickups.add(potion);
               this.registry.set(regName, 'active');
             }
           coinNum += 1;

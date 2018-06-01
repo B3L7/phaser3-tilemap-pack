@@ -9,9 +9,9 @@ export default class Fireball extends Phaser.GameObjects.Sprite {
     this.sound.setVolume(.2);
     this.sound.play();
     this.wallSound = this.scene.sound.add('fireballWallSFX');
-    this.wallSound.setVolume(.1);
+    this.wallSound.setVolume(.2);
     this.enemySound = this.scene.sound.add('fireballEnemySFX');
-    this.enemySound.setVolume(.1);
+    this.enemySound.setVolume(.2);
     this.scene.add.existing(this);
     this.scene.physics.moveTo(this, this.scene.crosshair.x, this.scene.crosshair.y);
     this.particles = this.scene.add.particles('atlas', 'whiteParticle');

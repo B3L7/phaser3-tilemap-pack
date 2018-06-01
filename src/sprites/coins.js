@@ -6,7 +6,7 @@ export default class Coins extends Phaser.GameObjects.Sprite {
     this.scene = config.scene;
     this.number = config.number;
     this.sound = this.scene.sound.add('coinSFX');
-    this.sound.setVolume(.2);
+    this.sound.setVolume(.4);
     this.scene.add.existing(this);
   }
 

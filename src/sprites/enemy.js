@@ -17,7 +17,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.moveX = 'none';
     this.moveY = 'none';
     this.deathSound = this.scene.sound.add('enemyDeathSFX');
-    this.deathSound.setVolume(.2);
+    this.deathSound.setVolume(.4);
     this.scene.add.existing(this);
   }
 

@@ -13,6 +13,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.input = this.scene.input.keyboard.createCursorKeys();
     this.canLoad = true;  //property controls whether the level can restart so that it can only be called once
 
+    this.noMagicSound = this.scene.sound.add('outOfMagicSFX');
+    this.noMagicSound.setVolume(.4);
+
+    this.hurtSound = this.scene.sound.add('playerDamageSFX');
+    this.hurtSound.setVolume(.4);
+
     //sync crosshair position with pointer
     this.scene.input.on('pointermove', function (pointer) {
       this.scene.crosshair.x = pointer.x;
@@ -31,6 +37,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.scene.playerAttack.add(fireball);
         this.scene.registry.set('magic_current', magic - 1);
         this.scene.events.emit('magicChange'); //tell the scene the magic has changed so the HUD is updated
+      } else {
+        this.noMagicSound.play();
       }
     }, this);
 
@@ -99,6 +107,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   damage(ammount) {
     if (!this.damaged) {
+      this.hurtSound.play();
       this.scene.cameras.main.shake(32);
       this.damaged = true;
       let health = this.scene.registry.get('health_current'); //find out the player's current health

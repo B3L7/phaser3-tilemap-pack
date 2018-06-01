@@ -13,6 +13,11 @@ export default class HUD extends Phaser.Scene {
     this.coins = this.add.bitmapText(this.cameras.main.width - 1, 1, 'minecraft', `Coins: ${this.registry.get('coins_current')}`).setScrollFactor(0);
     this.coins.setOrigin(1, 0);
 
+    this.healthAlarm = this.sound.add('lowHealthSFX')
+    this.healthAlarm.setVolume(.2);
+    this.healthAlarm.setLoop(true);
+    this.alarmed = false;
+
     const level = this.scene.get('Level');
     level.events.on('coinChange', this.updateCoins, this);  //watch the level to see if the coin count has changed. Event emitted by coin class.
     level.events.on('healthChange', this.updateHealth, this);  //watch the level to see if the coin health has changed. Event emitted by player and meat class.
@@ -29,6 +34,13 @@ export default class HUD extends Phaser.Scene {
   updateHealth() 
   {
     this.health.setText(`Health: ${this.registry.get('health_current')} / ${this.registry.get('health_max')}`);
+    if (this.registry.get('health_current') <= 1 && !this.alarmed) {
+      this.alarmed = true;
+      this.healthAlarm.play();
+    } else if (this.registry.get('health_current') > 1 && this.alarmed) {
+      this.alarmed = false;
+      this.healthAlarm.stop();
+    }
   }
 
   updateMagic() 
