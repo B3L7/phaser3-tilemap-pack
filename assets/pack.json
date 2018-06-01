@@ -34,6 +34,16 @@
             },
             {
                 "type": "audio",
+                "key": "jugSFX",
+                "url": "assets/sfx/sfx_sounds_powerup2.wav"
+            },
+            {
+                "type": "audio",
+                "key": "heartSFX",
+                "url": "assets/sfx/sfx_sounds_powerup6.wav"
+            },
+            {
+                "type": "audio",
                 "key": "enemyDeathSFX",
                 "url": "assets/sfx/sfx_deathscream_alien3.wav"
             },

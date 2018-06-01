@@ -148,6 +148,54 @@
                  "width":16,
                  "x":256,
                  "y":432
+                }, 
+                {
+                 "gid":97,
+                 "height":16,
+                 "id":12,
+                 "name":"",
+                 "rotation":0,
+                 "type":"jug",
+                 "visible":true,
+                 "width":16,
+                 "x":448,
+                 "y":528
+                }, 
+                {
+                 "gid":97,
+                 "height":16,
+                 "id":13,
+                 "name":"",
+                 "rotation":0,
+                 "type":"jug",
+                 "visible":true,
+                 "width":16,
+                 "x":240,
+                 "y":496
+                }, 
+                {
+                 "gid":94,
+                 "height":16,
+                 "id":14,
+                 "name":"",
+                 "rotation":0,
+                 "type":"heart",
+                 "visible":true,
+                 "width":16,
+                 "x":416,
+                 "y":480
+                }, 
+                {
+                 "gid":94,
+                 "height":16,
+                 "id":15,
+                 "name":"",
+                 "rotation":0,
+                 "type":"heart",
+                 "visible":true,
+                 "width":16,
+                 "x":288,
+                 "y":336
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -155,7 +203,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":12,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "properties":
     {
@@ -854,7 +902,7 @@
          "margin":0,
          "name":"objects",
          "spacing":0,
-         "tilecount":6,
+         "tilecount":7,
          "tileheight":16,
          "tiles":
             {
@@ -899,6 +947,13 @@
                  "imageheight":16,
                  "imagewidth":16,
                  "type":"meat"
+                },
+             "6":
+                {
+                 "image":"..\/..\/design\/sprites\/jug.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "type":"jug"
                 }
             },
          "tilewidth":16

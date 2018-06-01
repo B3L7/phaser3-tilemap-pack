@@ -3,6 +3,8 @@ import Enemy from '../sprites/enemy';
 import Coins from '../sprites/coins';
 import Meat from '../sprites/meat';
 import Potion from '../sprites/potion';
+import Jug from '../sprites/jug';
+import Heart from '../sprites/heart';
 
 export default class Level extends Phaser.Scene {
   constructor() 
@@ -14,6 +16,7 @@ export default class Level extends Phaser.Scene {
 
   create() 
   {
+    this.cameras.main.setBackgroundColor(0x2a0503);
     //point the variable at the registry which is assigned either at the Preload scene or just prior to level restart
     let load = this.registry.get('load');
 
@@ -46,6 +49,7 @@ export default class Level extends Phaser.Scene {
         x: spawn.x, 
         y: spawn.y,
       });
+    this.cameras.main.startFollow(this.player);
     this.playerAttack = this.add.group(null); //create attack group to hold player's fireballs
     this.playerAttack.runChildUpdate = true;
 
@@ -71,7 +75,9 @@ export default class Level extends Phaser.Scene {
     const level = this.registry.get('load');
     let coinNum = 1;  //initialize our coin numbering used to check if the coin has been picked up
     let meatNum = 1;  //initialize our meat numbering used to check if the meat has been picked up
-    let potNum = 1;  //initialize our potion numbering used to check if the meat has been picked up
+    let potNum = 1;  //initialize our potion numbering used to check if the potion has been picked up
+    let jugNum = 1;  //initialize our jug numbering used to check if the jug has been picked up
+    let heartNum = 1;  //initialize our heart numbering used to check if the heart has been picked up
     let enemyNum = 1; //initialize our enemy numbering used to check if the enemy has been killed
     let regName
     objects.objects.forEach(
@@ -126,7 +132,37 @@ export default class Level extends Phaser.Scene {
               this.pickups.add(potion);
               this.registry.set(regName, 'active');
             }
-          coinNum += 1;
+          potNum += 1;
+        }
+        if (object.type === 'jug') {
+          //check the registry to see if the jug has already been picked. If not create the jug in the level and register it with the game
+          regName = `${level}_Jug_${jugNum}`;
+          if (this.registry.get(regName) !== 'picked') {
+            let jug = new Jug({
+              scene: this,
+              x: object.x + 8, 
+              y: object.y - 8,
+              number: jugNum
+              });
+              this.pickups.add(jug);
+              this.registry.set(regName, 'active');
+            }
+          jugNum += 1;
+        }
+        if (object.type === 'heart') {
+          //check the registry to see if the heart has already been picked. If not create the heart in the level and register it with the game
+          regName = `${level}_Heart_${heartNum}`;
+          if (this.registry.get(regName) !== 'picked') {
+            let heart = new Heart({
+              scene: this,
+              x: object.x + 8, 
+              y: object.y - 8,
+              number: heartNum
+              });
+              this.pickups.add(heart);
+              this.registry.set(regName, 'active');
+            }
+          heartNum += 1;
         }
         if (object.type === "enemy") {
           //check the registry to see if the enemy has already been killed. If not create the enemy in the level and register it with the game
