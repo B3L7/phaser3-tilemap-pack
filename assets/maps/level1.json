@@ -196,6 +196,18 @@
                  "width":16,
                  "x":288,
                  "y":336
+                }, 
+                {
+                 "gid":98,
+                 "height":16,
+                 "id":16,
+                 "name":"",
+                 "rotation":0,
+                 "type":"demon",
+                 "visible":true,
+                 "width":16,
+                 "x":352,
+                 "y":368
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -203,7 +215,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":16,
+ "nextobjectid":17,
  "orientation":"orthogonal",
  "properties":
     {
@@ -902,7 +914,7 @@
          "margin":0,
          "name":"objects",
          "spacing":0,
-         "tilecount":7,
+         "tilecount":8,
          "tileheight":16,
          "tiles":
             {
@@ -954,6 +966,13 @@
                  "imageheight":16,
                  "imagewidth":16,
                  "type":"jug"
+                },
+             "7":
+                {
+                 "image":"..\/..\/design\/sprites\/demon.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "type":"demon"
                 }
             },
          "tilewidth":16

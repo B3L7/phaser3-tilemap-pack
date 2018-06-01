@@ -24,8 +24,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     //sync crosshair position with pointer
     this.scene.input.on('pointermove', function (pointer) {
-      this.scene.crosshair.x = pointer.x;
-      this.scene.crosshair.y = pointer.y;
+      //this.scene.crosshair.x = pointer.x;
+      //this.scene.crosshair.y = pointer.y;
+      let mouse = pointer
+      this.scene.crosshair.setPosition(mouse.x + this.scene.cameras.main.scrollX, mouse.y + this.scene.cameras.main.scrollY);
     }, this);
   
     //create a new instance of fireball class when pointer is clicked and add it to player attack group for collision callbacks

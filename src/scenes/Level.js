@@ -1,5 +1,6 @@
 import Player from '../sprites/player';
 import Enemy from '../sprites/enemy';
+import Demon from '../sprites/demon';
 import Coins from '../sprites/coins';
 import Meat from '../sprites/meat';
 import Potion from '../sprites/potion';
@@ -37,6 +38,8 @@ export default class Level extends Phaser.Scene {
     //set up groups, tell group to run updates on its children, then call the object conversion method
     this.enemies = this.add.group(null);
     this.enemies.runChildUpdate = true;
+    this.enemyAttack = this.add.group(null);
+    this.enemyAttack.runChildUpdate = true;
     this.pickups = this.add.group(null);
     this.convertObjects();
 
@@ -79,6 +82,7 @@ export default class Level extends Phaser.Scene {
     let jugNum = 1;  //initialize our jug numbering used to check if the jug has been picked up
     let heartNum = 1;  //initialize our heart numbering used to check if the heart has been picked up
     let enemyNum = 1; //initialize our enemy numbering used to check if the enemy has been killed
+    let demonNum = 1; //initialize our demon numbering used to check if the demon has been killed
     let regName
     objects.objects.forEach(
       (object) => {
@@ -178,6 +182,21 @@ export default class Level extends Phaser.Scene {
             this.registry.set(regName, 'active');
           }
           enemyNum += 1;
+        }
+        if (object.type === "demon") {
+          //check the registry to see if the demon has already been killed. If not create the demon in the level and register it with the game
+          regName = `${level}_Demon_${demonNum}`;
+          if (this.registry.get(regName) !== 'dead') {
+            let demon = new Demon({
+            scene: this,
+            x: object.x + 8, 
+            y: object.y - 8,
+            number: demonNum
+            });
+            this.enemies.add(demon);
+            this.registry.set(regName, 'active');
+          }
+          demonNum += 1;
         }
       });
   }

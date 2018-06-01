@@ -47,6 +47,21 @@
                 "key": "enemyDeathSFX",
                 "url": "assets/sfx/sfx_deathscream_alien3.wav"
             },
+             {
+                "type": "audio",
+                "key": "demonDeathSFX",
+                "url": "assets/sfx/sfx_deathscream_alien1.wav"
+            },
+            {
+                "type": "audio",
+                "key": "enemyExclaim",
+                "url": "assets/sfx/sfx_sounds_high2.wav"
+            },
+            {
+                "type": "audio",
+                "key": "demonExclaim",
+                "url": "assets/sfx/sfx_alarm_loop8.wav"
+            },
             {
                 "type": "audio",
                 "key": "playerDamageSFX",

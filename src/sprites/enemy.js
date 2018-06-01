@@ -11,6 +11,11 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.alive = true;
     this.attack = 1;
     this.damaged = false;
+    this.canExclaim = true;
+    this.exclaimSound = this.scene.sound.add('enemyExclaim');
+    this.exclaimSound.setVolume(.2);
+    this.exclamation = this.scene.add.image(this.x, this.y - 10, 'atlas', 'exclamation');
+    this.exclamation.alpha = 0;
     this.playerDetected = false;
     this.detectionDistance = 64;
     this.canDecide = true;
@@ -24,24 +29,21 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   update(time, delta) 
   {
     if (this.alive) {
+      this.exclamation.setPosition(this.x, this.y - 12);
       this.playerDetected = this.detectPlayer();
       if (!this.damaged) {
         if (this.playerDetected) {
-          if (this.x > this.scene.player.x) {
-            this.moveX = 'left';
-          } else if (this.x < this.scene.player.x) {
-            this.moveX = 'right';
-          } else {
-            this.moveX = 'none';
+          if (this.canExclaim) {
+            this.canExclaim = false;
+            this.exclaimSound.play();
+            this.exclamation.alpha = 1;
+            this.scene.time.addEvent({ delay: 500, callback: this.hideExclaim, callbackScope: this });
           }
-          if (this.y > this.scene.player.y) {
-            this.moveY = 'up';
-          } else if (this.y < this.scene.player.y) {
-            this.moveY = 'down';
-          } else {
-            this.moveY = 'none';
-          }
+          this.detectBehavior();
         } else {
+          if (!this.canExclaim){
+            this.canExclaim = true;
+          }
           //decide where to move
           if (this.canDecide) {
             this.canDecide = false;
@@ -77,10 +79,29 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     }
   }
 
-  detectPlayer() {
-    const distanceToPlayerX = Math.abs(this.x - this.scene.player.x);
-    const distanceToPlayerY = Math.abs(this.y - this.scene.player.y);
-    return (distanceToPlayerY <= this.detectionDistance) &&  (distanceToPlayerX <= this.detectionDistance) && this.scene.player.alive && !this.scene.player.damaged;
+  detectPlayer() 
+  {
+    this.distanceToPlayerX = Math.abs(this.x - this.scene.player.x);
+    this.distanceToPlayerY = Math.abs(this.y - this.scene.player.y);
+    return (this.distanceToPlayerY <= this.detectionDistance) &&  (this.distanceToPlayerX <= this.detectionDistance) && this.scene.player.alive && !this.scene.player.damaged;
+  }
+
+  detectBehavior()
+  {
+    if (this.x > this.scene.player.x) {
+      this.moveX = 'left';
+    } else if (this.x < this.scene.player.x) {
+      this.moveX = 'right';
+    } else {
+      this.moveX = 'none';
+    }
+    if (this.y > this.scene.player.y) {
+      this.moveY = 'up';
+    } else if (this.y < this.scene.player.y) {
+      this.moveY = 'down';
+    } else {
+      this.moveY = 'none';
+    }
   }
 
   movement()
@@ -108,7 +129,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     }
   }
 
-  resetDecide() {
+  resetDecide() 
+  {
     this.canDecide = true;
   }
 
@@ -128,10 +150,21 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.setTint(0xffffff);
   }
 
+  hideExclaim() 
+  {
+    this.exclamation.alpha = 0;
+  }
+
   die()
   {
-    this.scene.registry.set(`${this.scene.registry.get('load')}_Enemies_${this.number}`, 'dead'); //register this enemy as dead so it is not added to future instances of this level.
+    this.deathRegister();
+    this.exclamation.destroy();
     this.destroy();
+  }
+
+  deathRegister()
+  {
+    this.scene.registry.set(`${this.scene.registry.get('load')}_Enemies_${this.number}`, 'dead'); //register this enemy as dead so it is not added to future instances of this level.
   }
   
 }
