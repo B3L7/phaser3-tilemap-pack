@@ -123,7 +123,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   damage(ammount) 
   {
-    if (!this.damaged) {
+    if (!this.damaged && this.alive) {
       this.hurtSound.play();
       this.scene.cameras.main.shake(32);
       this.damaged = true;

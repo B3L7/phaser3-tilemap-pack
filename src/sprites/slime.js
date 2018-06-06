@@ -11,7 +11,7 @@ export default class Demon extends Enemy {
 		this.health = 2;
 		this.deathSound = this.scene.sound.add('slimeDeathSFX');
     	this.deathSound.setVolume(.4);
-    	this.detectionDistance = 32;
+    	this.detectionDistance = 48;
     	this.walk = 8;
     	this.run = 16;
 	}

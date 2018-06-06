@@ -10,7 +10,7 @@ export default class HUD extends Phaser.Scene {
   {
     this.health = this.add.bitmapText(1, 1, 'minecraft', `Health: ${this.registry.get('health_current')} / ${this.registry.get('health_max')}`).setScrollFactor(0);
     this.magic = this.add.bitmapText(1, 18, 'minecraft', `Magic: ${this.registry.get('magic_current')} / ${this.registry.get('magic_max')}`).setScrollFactor(0);
-    this.coins = this.add.bitmapText(this.cameras.main.width - 1, 1, 'minecraft', `Coins: ${this.registry.get('coins_current')}`).setScrollFactor(0);
+    this.coins = this.add.bitmapText(this.cameras.main.width - 1, 1, 'minecraft', `Coins: ${this.registry.get('coins_current')} / ${this.registry.get('coins_max')}`).setScrollFactor(0);
     this.coins.setOrigin(1, 0);
 
     this.healthAlarm = this.sound.add('lowHealthSFX')
@@ -29,7 +29,7 @@ export default class HUD extends Phaser.Scene {
 
   updateCoins() 
   {
-    this.coins.setText(`Coins: ${this.registry.get('coins_current')}`);
+    this.coins.setText(`Coins: ${this.registry.get('coins_current')} / ${this.registry.get('coins_max')}`);
   }
 
   updateHealth() 

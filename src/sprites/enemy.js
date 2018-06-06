@@ -48,6 +48,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
             this.exclamation.alpha = 1;
             this.scene.time.addEvent({ delay: 500, callback: this.hideExclaim, callbackScope: this });
           }
+          //call the player detected behavior
           this.detectBehavior();
         } else {
           if (!this.canExclaim){
@@ -75,15 +76,30 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
             }
           }
         }
+
+        //move based on above behavior
         this.movement();
       }
 
-
+      //kill this dude!
       if (this.health <= 0) {
         this.deathSound.play();
         this.alive = false;
         this.setTint(0x2a0503);
         this.scene.time.addEvent({ delay: 1000, callback: this.die, callbackScope: this });
+      }
+
+      //hide if out of bounds
+      if (this.x > this.scene.physics.world.bounds.width) {
+        this.setAlpha(0);
+      } else if (this.x < 0) {
+        this.setAlpha(0);
+      } else if (this.y > this.scene.physics.world.bounds.height) {
+        this.setAlpha(0);
+      } else if (this.y < 0) {
+        this.setAlpha(0);
+      } else {
+        this.setAlpha(1);
       }
     }
   }

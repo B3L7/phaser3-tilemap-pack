@@ -27,6 +27,9 @@ export default class Level extends Phaser.Scene {
     this.music.setLoop(true);
     this.music.play();
 
+    this.fanfare = this.sound.add('fanfareSFX');
+    this.fanfare.setVolume(.5);
+
     //load map based on registry value, set physics bounds, and create layer
     this.map = this.make.tilemap({ key: `${load}Map` });
     this.physics.world.bounds.width = this.map.widthInPixels;
@@ -80,8 +83,27 @@ export default class Level extends Phaser.Scene {
   update (time, delta) 
   {
     this.player.update(time, delta);  //the player class update method must be called each cycle as the class is not currently part of a group
+    
+    //center text over player if a new game
     if (this.centerText) {
       this.text.setPosition(this.player.x, this.player.y - 32);
+    }
+
+    //win condition
+    if (this.player.alive){
+      let coinsCurrent = this.registry.get('coins_current');
+      let coinsMax = this.registry.get('coins_max');
+      if (coinsCurrent >= coinsMax) {
+        this.player.alive = false;
+        this.player.body.setVelocity(0);
+        this.fanfare.play();
+        this.particles = this.add.particles('atlas', 'coins');
+        this.emitter = this.particles.createEmitter();
+        this.emitter.setPosition(this.player.x, this.player.y);
+        this.emitter.setSpeed(32);
+        this.emitter.explode( 16, this.player.x, this.player.y );
+        this.time.addEvent({ delay: 1000, callback: () => {this.end('win');}, callbackScope: this });
+      }
     }
   }
 
@@ -232,7 +254,9 @@ export default class Level extends Phaser.Scene {
   }
 
   playerEnemy(player, enemy){
-    player.damage(enemy.attack);
+    if (enemy.alive){
+      player.damage(enemy.attack);
+    }
   }
 
   fireballWall(fireball, wall)
@@ -273,6 +297,7 @@ export default class Level extends Phaser.Scene {
 
   changeText(number)
   {
+    let coins = this.registry.get('coins_max');
     let text = this.text;
     let centerText = this.centerText;
     if (number === 1) {
@@ -319,7 +344,7 @@ export default class Level extends Phaser.Scene {
         },
         onComplete: () => {
           text.setAlpha(0);
-          text.setText('Collect all the coins!');
+          text.setText(`Collect ${coins} coins!`);
         }
        });
     } else if (number === 4) {
@@ -357,7 +382,6 @@ export default class Level extends Phaser.Scene {
     }
   }
 
-
   end(type)
   {
     //restart the scene. You can place additional cleanup functions in here
@@ -367,12 +391,12 @@ export default class Level extends Phaser.Scene {
     } else if (type === 'gameOver') {
       this.cameras.main.fade(1000, 16.5, 2.0, 1.2);
       this.events.emit('gameOver');
-      this.time.addEvent({ delay: 1000, callback: this.overTransistion, callbackScope: this });
+      this.time.addEvent({ delay: 1000, callback: () => {this.scene.start('GameOver', 'lose');}, callbackScope: this });
+    } else if (type === 'win') {
+      this.cameras.main.fade(1000, 16.5, 2.0, 1.2);
+      this.events.emit('gameOver');
+      this.time.addEvent({ delay: 1000, callback: () => {this.scene.start('GameOver', 'win');}, callbackScope: this });
     }
-  }
-
-  overTransistion() {
-    this.scene.start('GameOver');
   }
 
 }

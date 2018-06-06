@@ -19,6 +19,11 @@
             },
             {
                 "type": "audio",
+                "key": "fanfareSFX",
+                "url": "assets/sfx/sfx_sounds_fanfare3.wav"
+            },
+            {
+                "type": "audio",
                 "key": "coinSFX",
                 "url": "assets/sfx/sfx_coin_double2.wav"
             },
