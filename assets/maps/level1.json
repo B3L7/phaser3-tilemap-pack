@@ -207,7 +207,19 @@
                  "visible":true,
                  "width":16,
                  "x":352,
-                 "y":368
+                 "y":560
+                }, 
+                {
+                 "gid":99,
+                 "height":16,
+                 "id":17,
+                 "name":"",
+                 "rotation":0,
+                 "type":"slime",
+                 "visible":true,
+                 "width":16,
+                 "x":432,
+                 "y":320
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -215,7 +227,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":17,
+ "nextobjectid":18,
  "orientation":"orthogonal",
  "properties":
     {
@@ -914,7 +926,7 @@
          "margin":0,
          "name":"objects",
          "spacing":0,
-         "tilecount":8,
+         "tilecount":9,
          "tileheight":16,
          "tiles":
             {
@@ -973,6 +985,13 @@
                  "imageheight":16,
                  "imagewidth":16,
                  "type":"demon"
+                },
+             "8":
+                {
+                 "image":"..\/..\/design\/sprites\/slime.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "type":"slime"
                 }
             },
          "tilewidth":16

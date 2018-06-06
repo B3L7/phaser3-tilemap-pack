@@ -1,6 +1,7 @@
 import Player from '../sprites/player';
 import Enemy from '../sprites/enemy';
 import Demon from '../sprites/demon';
+import Slime from '../sprites/slime';
 import Coins from '../sprites/coins';
 import Meat from '../sprites/meat';
 import Potion from '../sprites/potion';
@@ -85,6 +86,7 @@ export default class Level extends Phaser.Scene {
     let heartNum = 1;  //initialize our heart numbering used to check if the heart has been picked up
     let enemyNum = 1; //initialize our enemy numbering used to check if the enemy has been killed
     let demonNum = 1; //initialize our demon numbering used to check if the demon has been killed
+    let slimeNum = 1; //initialize our slime numbering used to check if the slime has been killed
     let regName
     objects.objects.forEach(
       (object) => {
@@ -199,6 +201,21 @@ export default class Level extends Phaser.Scene {
             this.registry.set(regName, 'active');
           }
           demonNum += 1;
+        }
+        if (object.type === "slime") {
+          //check the registry to see if the slime has already been killed. If not create the slime in the level and register it with the game
+          regName = `${level}_Slime_${slimeNum}`;
+          if (this.registry.get(regName) !== 'dead') {
+            let slime = new Slime({
+            scene: this,
+            x: object.x + 8, 
+            y: object.y - 8,
+            number: slimeNum
+            });
+            this.enemies.add(slime);
+            this.registry.set(regName, 'active');
+          }
+          slimeNum += 1;
         }
       });
   }

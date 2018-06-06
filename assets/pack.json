@@ -47,10 +47,15 @@
                 "key": "enemyDeathSFX",
                 "url": "assets/sfx/sfx_deathscream_alien3.wav"
             },
-             {
+            {
                 "type": "audio",
                 "key": "demonDeathSFX",
                 "url": "assets/sfx/sfx_deathscream_alien1.wav"
+            },
+            {
+                "type": "audio",
+                "key": "slimeDeathSFX",
+                "url": "assets/sfx/sfx_deathscream_alien6.wav"
             },
             {
                 "type": "audio",

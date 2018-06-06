@@ -1,5 +1,5 @@
 import Enemy from './enemy';
-import DarkFireball from './darkFireball'
+import DarkFireball from './darkFireball';
 import Meat from './meat';
 import Potion from './potion';
 import Jug from './jug';

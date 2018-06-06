@@ -26,6 +26,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.canDecide = true;
     this.moveX = 'none';
     this.moveY = 'none';
+    this.walk = 16;
+    this.run = 32;
     this.deathSound = this.scene.sound.add('enemyDeathSFX');
     this.deathSound.setVolume(.4);
     this.scene.add.existing(this);
@@ -113,9 +115,9 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   {
     let speed;
     if (this.playerDetected) {
-      speed = 32;
+      speed = this.run;
     } else {
-      speed = 16;
+      speed = this.walk;
     }
     if (this.moveX === 'none') {
       this.body.setVelocityX(0);
