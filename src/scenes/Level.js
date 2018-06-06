@@ -62,8 +62,10 @@ export default class Level extends Phaser.Scene {
     this.physics.add.collider(this.enemies, this.layer);
     this.physics.add.collider(this.enemies, this.enemies);
     this.physics.add.collider(this.playerAttack, this.layer, this.fireballWall);  //collide callback for fireball hitting wall
+    this.physics.add.collider(this.enemyAttack, this.layer, this.fireballWall);  //collide callback for fireball hitting wall
     this.physics.add.collider(this.playerAttack, this.enemies, this.fireballEnemy); //collide callback for fireball hitting enemy
-
+    this.physics.add.collider(this.playerAttack, this.enemyAttack, this.fireballFireball); //collide callback for fireball hitting darkFireball
+    this.physics.add.collider(this.player, this.enemyAttack, this.fireballPlayer); //collide callback for fireball hitting player
   }
 
   update (time, delta) 
@@ -213,6 +215,17 @@ export default class Level extends Phaser.Scene {
   fireballEnemy(fireball, enemy)
   {
     fireball.enemyCollide(enemy);
+  }
+
+  fireballPlayer(player, fireball)
+  {
+    fireball.playerCollide(player);
+  }
+
+  fireballFireball(fireball1, fireball2)
+  {
+    fireball1.fireballCollide();
+    fireball2.fireballCollide();
   }
 
   end(type)

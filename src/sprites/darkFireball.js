@@ -33,11 +33,18 @@ export default class DarkFireball extends Phaser.GameObjects.Sprite {
     this.destroy();
   }
 
+  fireballCollide () 
+  {
+    this.emitter.explode( 64, this.x, this.y );
+    this.wallSound.play();
+    this.destroy();
+  }
+
   playerCollide (player) 
   {
     this.emitter.explode( 32, this.x, this.y );
     this.playerSound.play();
-    enemy.damage(this.damage);
+    player.damage(this.damage);
     this.destroy();
   }
   

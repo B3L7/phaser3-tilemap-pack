@@ -12,14 +12,14 @@ export default class Preload extends Phaser.Scene {
     this.cameras.main.setBackgroundColor(0x2a0503);
     this.fullBar = this.add.graphics();
     this.fullBar.fillStyle(0xda7a34, 1);
-    this.fullBar.fillRect(126, 214, 260, 20);
+    this.fullBar.fillRect((this.cameras.main.width / 4)-2,(this.cameras.main.height /2) - 18, (this.cameras.main.width / 2) + 4, 20);
     this.progress = this.add.graphics();
 
     //pass loading progress as value to loading bar and redraw as files load
     this.load.on('progress', function (value) {
         this.progress.clear();
         this.progress.fillStyle(0xfff6d3, 1);
-        this.progress.fillRect(128, 216, 256 * value, 16);
+        this.progress.fillRect((this.cameras.main.width / 4), (this.cameras.main.height /2) - 16, (this.cameras.main.width / 2) * value, 16);
     }, this);
 
     //cleanup our graphics on complete

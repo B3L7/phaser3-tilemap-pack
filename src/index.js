@@ -12,8 +12,8 @@ const config = {
     parent: 'phaser-tilemap-pack',
     pixelArt: true,
     clearBeforeRender: false,
-    width: 512,
-    height: 448,
+    width: 640,
+    height: 360,
     physics: {
         default: 'arcade'
     },

@@ -1,3 +1,8 @@
+import Meat from './meat';
+import Potion from './potion';
+import Jug from './jug';
+import Heart from './heart';
+
 export default class Enemy extends Phaser.GameObjects.Sprite {
   constructor(config) 
   {
@@ -159,12 +164,51 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   {
     this.deathRegister();
     this.exclamation.destroy();
+    this.dropLoot();
     this.destroy();
   }
 
   deathRegister()
   {
     this.scene.registry.set(`${this.scene.registry.get('load')}_Enemies_${this.number}`, 'dead'); //register this enemy as dead so it is not added to future instances of this level.
+  }
+
+  dropLoot() 
+  {
+    let decision = Phaser.Math.RND.integerInRange(1, 20);
+    if (decision === 1 ) {
+      let heart = new Heart({
+        scene: this.scene,
+        x: this.x, 
+        y: this.y,
+        number: 0
+      });
+      this.scene.pickups.add(heart);
+    }  else if (decision === 2 ) {
+      let jug = new Jug({
+        scene: this.scene,
+        x: this.x, 
+        y: this.y,
+        number: 0
+      });
+      this.scene.pickups.add(jug);
+    } else if (decision > 2 && decision <= 6) {
+      let potion = new Potion({
+        scene: this.scene,
+        x: this.x, 
+        y: this.y,
+        number: 0
+      });
+      this.scene.pickups.add(potion);
+    } else if (decision > 6 && decision <= 10) {
+      let meat = new Meat({
+        scene: this.scene,
+        x: this.x, 
+        y: this.y,
+        number: 0
+      });
+      this.scene.pickups.add(meat);
+    }
   }
   
 }
