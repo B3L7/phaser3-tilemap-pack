@@ -32,6 +32,7 @@ export default class Demon extends Enemy {
 	        number: 0
 	      });
 	      this.scene.pickups.add(potion);
+	      this.dropSound.play();
 	    } else if (decision > 2 && decision <= 4) {
 	      let meat = new Meat({
 	        scene: this.scene,
@@ -40,6 +41,7 @@ export default class Demon extends Enemy {
 	        number: 0
 	      });
 	      this.scene.pickups.add(meat);
+	      this.dropSound.play();
 	    }
 	}
 

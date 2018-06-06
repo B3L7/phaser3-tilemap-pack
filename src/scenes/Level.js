@@ -67,11 +67,22 @@ export default class Level extends Phaser.Scene {
     this.physics.add.collider(this.playerAttack, this.enemies, this.fireballEnemy); //collide callback for fireball hitting enemy
     this.physics.add.collider(this.playerAttack, this.enemyAttack, this.fireballFireball); //collide callback for fireball hitting darkFireball
     this.physics.add.collider(this.player, this.enemyAttack, this.fireballPlayer); //collide callback for fireball hitting player
+
+    if (this.registry.get('newGame') === true) {
+      this.newGame();
+      this.centerText = true;
+      this.textCall = 1;
+    } else {
+      this.centerText = false;
+    }
   }
 
   update (time, delta) 
   {
     this.player.update(time, delta);  //the player class update method must be called each cycle as the class is not currently part of a group
+    if (this.centerText) {
+      this.text.setPosition(this.player.x, this.player.y - 32);
+    }
   }
 
   convertObjects() 
@@ -244,6 +255,108 @@ export default class Level extends Phaser.Scene {
     fireball1.fireballCollide();
     fireball2.fireballCollide();
   }
+
+  newGame() 
+  {
+    this.registry.set('newGame', false);
+    this.text = this.add.bitmapText(this.player.x, this.player.y - 32, 'minecraft', 'Press UP, DOWN, LEFT, and RIGHT to move.');
+    this.text.setOrigin(.5);
+    this.time.addEvent({ delay: 6000, 
+      callback: () => {
+          this.changeText(this.textCall);
+          this.textCall += 1;
+        },
+      callbackScope: this,
+      repeat: 5
+    });
+  }
+
+  changeText(number)
+  {
+    let text = this.text;
+    let centerText = this.centerText;
+    if (number === 1) {
+      let alpha = 1;
+      this.tweens.addCounter({
+        from: 0,
+        to: 10,
+        duration: 2000,
+        onUpdate: function ()
+        {
+            text.setAlpha(alpha);
+            alpha -= .1;
+        },
+        onComplete: () => {
+          text.setAlpha(0);
+          text.setText('POINT and CLICK to attack.');
+        }
+       });
+    } else if (number === 2) {
+      let alpha = 0;
+      this.tweens.addCounter({
+        from: 0,
+        to: 10,
+        duration: 2000,
+        onUpdate: function ()
+        {
+            text.setAlpha(alpha);
+            alpha += .1;
+        },
+        onComplete: () => {
+          text.setAlpha(1);
+        }
+       });
+    } else if (number === 3) {
+      let alpha = 1;
+      this.tweens.addCounter({
+        from: 0,
+        to: 10,
+        duration: 2000,
+        onUpdate: function ()
+        {
+            text.setAlpha(alpha);
+            alpha -= .1;
+        },
+        onComplete: () => {
+          text.setAlpha(0);
+          text.setText('Collect all the coins!');
+        }
+       });
+    } else if (number === 4) {
+      let alpha = 0;
+      this.tweens.addCounter({
+        from: 0,
+        to: 10,
+        duration: 2000,
+        onUpdate: function ()
+        {
+            text.setAlpha(alpha);
+            alpha += .1;
+        },
+        onComplete: () => {
+          text.setAlpha(1);
+        }
+       });
+    } else if (number === 5) {
+      let alpha = 1;
+      this.tweens.addCounter({
+        from: 0,
+        to: 10,
+        duration: 2000,
+        onUpdate: function ()
+        {
+            text.setAlpha(alpha);
+            alpha -= .1;
+        },
+        onComplete: () => {
+          text.setAlpha(0);
+          centerText = false;
+          text.destroy();
+        }
+       });
+    }
+  }
+
 
   end(type)
   {

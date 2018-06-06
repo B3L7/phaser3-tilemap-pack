@@ -44,6 +44,11 @@
             },
             {
                 "type": "audio",
+                "key": "itemDropSFX",
+                "url": "assets/sfx/sfx_sounds_interaction14.wav"
+            },
+            {
+                "type": "audio",
                 "key": "enemyDeathSFX",
                 "url": "assets/sfx/sfx_deathscream_alien3.wav"
             },

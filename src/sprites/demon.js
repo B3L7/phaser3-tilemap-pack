@@ -71,6 +71,7 @@ export default class Demon extends Enemy {
 	        number: 0
 	      });
 	      this.scene.pickups.add(heart);
+	      this.dropSound.play();
 	    }  else if (decision > 2 && decision <=4 ) {
 	      let jug = new Jug({
 	        scene: this.scene,
@@ -79,6 +80,7 @@ export default class Demon extends Enemy {
 	        number: 0
 	      });
 	      this.scene.pickups.add(jug);
+	      this.dropSound.play();
 	    } else if (decision > 4 && decision <= 12) {
 	      let potion = new Potion({
 	        scene: this.scene,
@@ -87,6 +89,7 @@ export default class Demon extends Enemy {
 	        number: 0
 	      });
 	      this.scene.pickups.add(potion);
+	      this.dropSound.play();
 	    } else if (decision > 12 && decision <= 20) {
 	      let meat = new Meat({
 	        scene: this.scene,
@@ -95,6 +98,7 @@ export default class Demon extends Enemy {
 	        number: 0
 	      });
 	      this.scene.pickups.add(meat);
+	      this.dropSound.play();
 	    }
 	}
 

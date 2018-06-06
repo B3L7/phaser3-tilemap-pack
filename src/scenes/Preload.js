@@ -44,6 +44,7 @@ export default class Preload extends Phaser.Scene {
   {
     //the game registry provides a place accessible by all scenes to set and get data.
     //Here we store our key that tells the LevelScene what map to load.
+    this.registry.set('newGame', true);
     this.registry.set('health_max', 4);
     this.registry.set('health_current', 4);
     this.registry.set('magic_max', 20);

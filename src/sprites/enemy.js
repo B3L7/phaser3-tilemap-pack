@@ -30,6 +30,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     this.run = 32;
     this.deathSound = this.scene.sound.add('enemyDeathSFX');
     this.deathSound.setVolume(.4);
+    this.dropSound = this.scene.sound.add('itemDropSFX');
+    this.dropSound.setVolume(.2);
     this.scene.add.existing(this);
   }
 
@@ -81,7 +83,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         this.deathSound.play();
         this.alive = false;
         this.setTint(0x2a0503);
-        this.scene.time.addEvent({ delay: 500, callback: this.die, callbackScope: this });
+        this.scene.time.addEvent({ delay: 1000, callback: this.die, callbackScope: this });
       }
     }
   }
@@ -186,6 +188,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         number: 0
       });
       this.scene.pickups.add(heart);
+      this.dropSound.play();
     }  else if (decision === 2 ) {
       let jug = new Jug({
         scene: this.scene,
@@ -194,6 +197,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         number: 0
       });
       this.scene.pickups.add(jug);
+      this.dropSound.play();
     } else if (decision > 2 && decision <= 6) {
       let potion = new Potion({
         scene: this.scene,
@@ -202,6 +206,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         number: 0
       });
       this.scene.pickups.add(potion);
+      this.dropSound.play();
     } else if (decision > 6 && decision <= 10) {
       let meat = new Meat({
         scene: this.scene,
@@ -210,6 +215,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         number: 0
       });
       this.scene.pickups.add(meat);
+      this.dropSound.play();
     }
   }
   
