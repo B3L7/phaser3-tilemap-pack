@@ -50,4 +50,9 @@ and
 
 
 
+## Change Log
 
+### Version 1.1.0 - September 6, 2018
+
+* Upgrade to Phaser 3.12.0
+* Minor fixes for 3.12 compatibility

@@ -40,11 +40,11 @@ export default class Level extends Phaser.Scene {
 
     this.spawnpoints = [];  //create an array to hold the spawnpoints populated by converObjects()
     //set up groups, tell group to run updates on its children, then call the object conversion method
-    this.enemies = this.add.group(null);
+    this.enemies = this.add.group();
     this.enemies.runChildUpdate = true;
-    this.enemyAttack = this.add.group(null);
+    this.enemyAttack = this.add.group();
     this.enemyAttack.runChildUpdate = true;
-    this.pickups = this.add.group(null);
+    this.pickups = this.add.group();
     this.convertObjects();
 
     let spawn = this.spawnpoints[this.registry.get('spawn')]; //assign spawn variable that points to the currently loaded spawnpoint
@@ -57,7 +57,7 @@ export default class Level extends Phaser.Scene {
         y: spawn.y,
       });
     this.cameras.main.startFollow(this.player);
-    this.playerAttack = this.add.group(null); //create attack group to hold player's fireballs
+    this.playerAttack = this.add.group(); //create attack group to hold player's fireballs
     this.playerAttack.runChildUpdate = true;
 
     //tell the physics system to collide player, appropriate tiles, and other objects based on group, run callbacks when appropriate

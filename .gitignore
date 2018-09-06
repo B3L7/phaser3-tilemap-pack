@@ -11,3 +11,8 @@ node_modules/
 
 # Build
 /npm-debug.log
+
+# Vim temps
+*~
+*.swp
+*.swo
