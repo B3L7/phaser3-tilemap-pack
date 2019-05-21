@@ -48,7 +48,7 @@ and
 
 ## Change Log
 
-### Version 1.2.0 - May 20, 2019
+### Version 1.2.0 - May 21, 2019
 
 * Upgrade to Phaser 3.17.0
 * Implemented pools for player and enemy fireballs
