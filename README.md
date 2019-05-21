@@ -20,15 +20,11 @@ We need [Node.js](https://nodejs.org) to install and run scripts.
 
 ## Install and run
 
-Run next commands in your terminal:
-
 | Command | Description |
 |---------|-------------|
-| `npm install` | Install dependencies and launch browser with examples.|
-| `npm run dev` | Perform a quick build without minification.|
-| `npm run build` | Perform a final build with minification.|
-| `npm start` | Launch browser to show the examples. <br> Press `Ctrl + c` to kill **http-server** process. |
-
+| `npm install` | Install project dependencies |
+| `npm start` | Build project and open web server running project |
+| `npm run build` | Builds code bundle with production settings (minification, uglification, etc..) |
 
 ## References
 Based on Project Template by Richard Davey:
@@ -51,6 +47,13 @@ and
 
 
 ## Change Log
+
+### Version 1.2.0 - May 20, 2019
+
+* Upgrade to Phaser 3.17.0
+* Implemented pools for player and enemy fireballs
+* Added scaling to game config
+* Updated to babel and webpack 4 to be in line with Phaser 3 Webpack Project Template
 
 ### Version 1.1.0 - September 6, 2018
 

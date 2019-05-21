@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from "phaser";
 
 import Preload from './scenes/Preload';
 import Level from './scenes/Level';
@@ -12,16 +12,20 @@ const config = {
     parent: 'phaser-tilemap-pack',
     pixelArt: true,
     clearBeforeRender: false,
-    width: 640,
-    height: 360,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        parent: 'phaser-example',
+        width: 640,
+        height: 360
+    },
     physics: {
         default: 'arcade'
     },
     scene: [
-        Preload,
-        Level,
-        HUD,
-        GameOver
+    Preload,
+    Level,
+    HUD,
+    GameOver
     ]
 };
 

@@ -1,5 +1,3 @@
-import Fireball from './fireball';
-
 export default class Player extends Phaser.GameObjects.Sprite {
   constructor(config) 
   {
@@ -24,8 +22,6 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
     //sync crosshair position with pointer
     this.scene.input.on('pointermove', function (pointer) {
-      //this.scene.crosshair.x = pointer.x;
-      //this.scene.crosshair.y = pointer.y;
       let mouse = pointer
       this.scene.crosshair.setPosition(mouse.x + this.scene.cameras.main.scrollX, mouse.y + this.scene.cameras.main.scrollY);
     }, this);
@@ -34,12 +30,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.scene.input.on('pointerdown', function (pointer) {
       let magic = this.scene.registry.get('magic_current');
       if (magic > 0) {
-        let fireball = new Fireball({
-          scene: this.scene,
-          x: this.x, 
-          y: this.y,
-        });
-        this.scene.playerAttack.add(fireball);
+        let fireball = this.scene.playerAttack.get();
+        if (fireball)
+        {
+            fireball.fire(this.x, this.y);
+
+        }
         this.scene.registry.set('magic_current', magic - 1);
         this.scene.events.emit('magicChange'); //tell the scene the magic has changed so the HUD is updated
       } else {

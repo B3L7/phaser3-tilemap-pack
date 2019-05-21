@@ -1,6 +1,8 @@
 import Player from '../sprites/player';
+import Fireball from '../sprites/fireball';
 import Enemy from '../sprites/enemy';
 import Demon from '../sprites/demon';
+import DarkFireball from '../sprites/darkFireball';
 import Slime from '../sprites/slime';
 import Coins from '../sprites/coins';
 import Meat from '../sprites/meat';
@@ -42,8 +44,11 @@ export default class Level extends Phaser.Scene {
     //set up groups, tell group to run updates on its children, then call the object conversion method
     this.enemies = this.add.group();
     this.enemies.runChildUpdate = true;
-    this.enemyAttack = this.add.group();
-    this.enemyAttack.runChildUpdate = true;
+    this.enemyAttack = this.add.group({
+       classType: DarkFireball,
+      maxSize: 50,
+      runChildUpdate: true 
+      });
     this.pickups = this.add.group();
     this.convertObjects();
 
@@ -52,13 +57,16 @@ export default class Level extends Phaser.Scene {
     this.crosshair = this.add.image(0, 0, 'atlas', 'crosshair');  //create crosshair which is controlled by player class
     //create a new instance of the player class at the currently loaded spawnpoint
     this.player = new Player({
-        scene: this,
-        x: spawn.x, 
-        y: spawn.y,
-      });
+      scene: this,
+      x: spawn.x, 
+      y: spawn.y,
+    });
     this.cameras.main.startFollow(this.player);
-    this.playerAttack = this.add.group(); //create attack group to hold player's fireballs
-    this.playerAttack.runChildUpdate = true;
+    this.playerAttack = this.add.group({
+      classType: Fireball,
+      maxSize: 100,
+      runChildUpdate: true 
+    }); //create attack group to hold player's fireballs
 
     //tell the physics system to collide player, appropriate tiles, and other objects based on group, run callbacks when appropriate
     this.physics.add.collider(this.player, this.layer);
@@ -139,10 +147,10 @@ export default class Level extends Phaser.Scene {
               x: object.x + 8, 
               y: object.y - 8,
               number: coinNum
-              });
-              this.pickups.add(coins);
-              this.registry.set(regName, 'active');
-            }
+            });
+            this.pickups.add(coins);
+            this.registry.set(regName, 'active');
+          }
           coinNum += 1;
         }
         if (object.type === 'meat') {
@@ -154,10 +162,10 @@ export default class Level extends Phaser.Scene {
               x: object.x + 8, 
               y: object.y - 8,
               number: meatNum
-              });
-              this.pickups.add(meat);
-              this.registry.set(regName, 'active');
-            }
+            });
+            this.pickups.add(meat);
+            this.registry.set(regName, 'active');
+          }
           coinNum += 1;
         }
         if (object.type === 'potion') {
@@ -169,10 +177,10 @@ export default class Level extends Phaser.Scene {
               x: object.x + 8, 
               y: object.y - 8,
               number: potNum
-              });
-              this.pickups.add(potion);
-              this.registry.set(regName, 'active');
-            }
+            });
+            this.pickups.add(potion);
+            this.registry.set(regName, 'active');
+          }
           potNum += 1;
         }
         if (object.type === 'jug') {
@@ -184,10 +192,10 @@ export default class Level extends Phaser.Scene {
               x: object.x + 8, 
               y: object.y - 8,
               number: jugNum
-              });
-              this.pickups.add(jug);
-              this.registry.set(regName, 'active');
-            }
+            });
+            this.pickups.add(jug);
+            this.registry.set(regName, 'active');
+          }
           jugNum += 1;
         }
         if (object.type === 'heart') {
@@ -199,10 +207,10 @@ export default class Level extends Phaser.Scene {
               x: object.x + 8, 
               y: object.y - 8,
               number: heartNum
-              });
-              this.pickups.add(heart);
-              this.registry.set(regName, 'active');
-            }
+            });
+            this.pickups.add(heart);
+            this.registry.set(regName, 'active');
+          }
           heartNum += 1;
         }
         if (object.type === "enemy") {
@@ -210,10 +218,10 @@ export default class Level extends Phaser.Scene {
           regName = `${level}_Enemies_${enemyNum}`;
           if (this.registry.get(regName) !== 'dead') {
             let enemy = new Enemy({
-            scene: this,
-            x: object.x + 8, 
-            y: object.y - 8,
-            number: enemyNum
+              scene: this,
+              x: object.x + 8, 
+              y: object.y - 8,
+              number: enemyNum
             });
             this.enemies.add(enemy);
             this.registry.set(regName, 'active');
@@ -225,10 +233,10 @@ export default class Level extends Phaser.Scene {
           regName = `${level}_Demon_${demonNum}`;
           if (this.registry.get(regName) !== 'dead') {
             let demon = new Demon({
-            scene: this,
-            x: object.x + 8, 
-            y: object.y - 8,
-            number: demonNum
+              scene: this,
+              x: object.x + 8, 
+              y: object.y - 8,
+              number: demonNum
             });
             this.enemies.add(demon);
             this.registry.set(regName, 'active');
@@ -240,10 +248,10 @@ export default class Level extends Phaser.Scene {
           regName = `${level}_Slime_${slimeNum}`;
           if (this.registry.get(regName) !== 'dead') {
             let slime = new Slime({
-            scene: this,
-            x: object.x + 8, 
-            y: object.y - 8,
-            number: slimeNum
+              scene: this,
+              x: object.x + 8, 
+              y: object.y - 8,
+              number: slimeNum
             });
             this.enemies.add(slime);
             this.registry.set(regName, 'active');
@@ -251,139 +259,139 @@ export default class Level extends Phaser.Scene {
           slimeNum += 1;
         }
       });
-  }
+}
 
-  playerEnemy(player, enemy){
-    if (enemy.alive){
-      player.damage(enemy.attack);
-    }
+playerEnemy(player, enemy){
+  if (enemy.alive){
+    player.damage(enemy.attack);
   }
+}
 
-  fireballWall(fireball, wall)
-  {
-    fireball.wallCollide();
-  }
+fireballWall(fireball, wall)
+{
+  fireball.wallCollide();
+}
 
-  fireballEnemy(fireball, enemy)
-  {
-    fireball.enemyCollide(enemy);
-  }
+fireballEnemy(fireball, enemy)
+{
+  fireball.enemyCollide(enemy);
+}
 
-  fireballPlayer(player, fireball)
-  {
-    fireball.playerCollide(player);
-  }
+fireballPlayer(player, fireball)
+{
+  fireball.playerCollide(player);
+}
 
-  fireballFireball(fireball1, fireball2)
-  {
-    fireball1.fireballCollide();
-    fireball2.fireballCollide();
-  }
+fireballFireball(fireball1, fireball2)
+{
+  fireball1.fireballCollide();
+  fireball2.fireballCollide();
+}
 
-  newGame() 
-  {
-    this.registry.set('newGame', false);
-    this.text = this.add.bitmapText(this.player.x, this.player.y - 32, 'minecraft', 'Press UP, DOWN, LEFT, and RIGHT to move.');
-    this.text.setOrigin(.5);
-    this.time.addEvent({ delay: 6000, 
-      callback: () => {
-          this.changeText(this.textCall);
-          this.textCall += 1;
-        },
-      callbackScope: this,
-      repeat: 5
+newGame() 
+{
+  this.registry.set('newGame', false);
+  this.text = this.add.bitmapText(this.player.x, this.player.y - 32, 'minecraft', 'Press UP, DOWN, LEFT, and RIGHT to move.');
+  this.text.setOrigin(.5);
+  this.time.addEvent({ delay: 6000, 
+    callback: () => {
+      this.changeText(this.textCall);
+      this.textCall += 1;
+    },
+    callbackScope: this,
+    repeat: 5
+  });
+}
+
+changeText(number)
+{
+  let coins = this.registry.get('coins_max');
+  let text = this.text;
+  let centerText = this.centerText;
+  if (number === 1) {
+    let alpha = 1;
+    this.tweens.addCounter({
+      from: 0,
+      to: 10,
+      duration: 2000,
+      onUpdate: function ()
+      {
+        text.setAlpha(alpha);
+        alpha -= .1;
+      },
+      onComplete: () => {
+        text.setAlpha(0);
+        text.setText('POINT and CLICK to attack.');
+      }
+    });
+  } else if (number === 2) {
+    let alpha = 0;
+    this.tweens.addCounter({
+      from: 0,
+      to: 10,
+      duration: 2000,
+      onUpdate: function ()
+      {
+        text.setAlpha(alpha);
+        alpha += .1;
+      },
+      onComplete: () => {
+        text.setAlpha(1);
+      }
+    });
+  } else if (number === 3) {
+    let alpha = 1;
+    this.tweens.addCounter({
+      from: 0,
+      to: 10,
+      duration: 2000,
+      onUpdate: function ()
+      {
+        text.setAlpha(alpha);
+        alpha -= .1;
+      },
+      onComplete: () => {
+        text.setAlpha(0);
+        text.setText(`Collect ${coins} coins!`);
+      }
+    });
+  } else if (number === 4) {
+    let alpha = 0;
+    this.tweens.addCounter({
+      from: 0,
+      to: 10,
+      duration: 2000,
+      onUpdate: function ()
+      {
+        text.setAlpha(alpha);
+        alpha += .1;
+      },
+      onComplete: () => {
+        text.setAlpha(1);
+      }
+    });
+  } else if (number === 5) {
+    let alpha = 1;
+    this.tweens.addCounter({
+      from: 0,
+      to: 10,
+      duration: 2000,
+      onUpdate: function ()
+      {
+        text.setAlpha(alpha);
+        alpha -= .1;
+      },
+      onComplete: () => {
+        text.setAlpha(0);
+        centerText = false;
+        text.destroy();
+      }
     });
   }
+}
 
-  changeText(number)
-  {
-    let coins = this.registry.get('coins_max');
-    let text = this.text;
-    let centerText = this.centerText;
-    if (number === 1) {
-      let alpha = 1;
-      this.tweens.addCounter({
-        from: 0,
-        to: 10,
-        duration: 2000,
-        onUpdate: function ()
-        {
-            text.setAlpha(alpha);
-            alpha -= .1;
-        },
-        onComplete: () => {
-          text.setAlpha(0);
-          text.setText('POINT and CLICK to attack.');
-        }
-       });
-    } else if (number === 2) {
-      let alpha = 0;
-      this.tweens.addCounter({
-        from: 0,
-        to: 10,
-        duration: 2000,
-        onUpdate: function ()
-        {
-            text.setAlpha(alpha);
-            alpha += .1;
-        },
-        onComplete: () => {
-          text.setAlpha(1);
-        }
-       });
-    } else if (number === 3) {
-      let alpha = 1;
-      this.tweens.addCounter({
-        from: 0,
-        to: 10,
-        duration: 2000,
-        onUpdate: function ()
-        {
-            text.setAlpha(alpha);
-            alpha -= .1;
-        },
-        onComplete: () => {
-          text.setAlpha(0);
-          text.setText(`Collect ${coins} coins!`);
-        }
-       });
-    } else if (number === 4) {
-      let alpha = 0;
-      this.tweens.addCounter({
-        from: 0,
-        to: 10,
-        duration: 2000,
-        onUpdate: function ()
-        {
-            text.setAlpha(alpha);
-            alpha += .1;
-        },
-        onComplete: () => {
-          text.setAlpha(1);
-        }
-       });
-    } else if (number === 5) {
-      let alpha = 1;
-      this.tweens.addCounter({
-        from: 0,
-        to: 10,
-        duration: 2000,
-        onUpdate: function ()
-        {
-            text.setAlpha(alpha);
-            alpha -= .1;
-        },
-        onComplete: () => {
-          text.setAlpha(0);
-          centerText = false;
-          text.destroy();
-        }
-       });
-    }
-  }
-
-  end(type)
-  {
+end(type)
+{
     //restart the scene. You can place additional cleanup functions in here
     this.music.stop();
     if (type === 'restart') {
