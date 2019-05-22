@@ -1,6 +1,6 @@
 {
   "name": "phaser3-tilemap-pack",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A Phaser 3 Tilemap & File Pack Template",
   "main": "src/index.js",
   "scripts": {

@@ -45,10 +45,10 @@ export default class Level extends Phaser.Scene {
     this.enemies = this.add.group();
     this.enemies.runChildUpdate = true;
     this.enemyAttack = this.add.group({
-       classType: DarkFireball,
-      maxSize: 50,
-      runChildUpdate: true 
-      });
+     classType: DarkFireball,
+     maxSize: 50,
+     runChildUpdate: true 
+   });
     this.pickups = this.add.group();
     this.convertObjects();
 
@@ -269,23 +269,31 @@ playerEnemy(player, enemy){
 
 fireballWall(fireball, wall)
 {
-  fireball.wallCollide();
+  if (fireball.active) {
+    fireball.wallCollide();
+  }
 }
 
 fireballEnemy(fireball, enemy)
 {
-  fireball.enemyCollide(enemy);
+  if (fireball.active){
+    fireball.enemyCollide(enemy);
+  }
 }
 
 fireballPlayer(player, fireball)
 {
-  fireball.playerCollide(player);
+  if (fireball.active) {
+    fireball.playerCollide(player);
+  }
 }
 
 fireballFireball(fireball1, fireball2)
 {
-  fireball1.fireballCollide();
-  fireball2.fireballCollide();
+  if (fireball1.active && fireball2.active) {
+    fireball1.fireballCollide();
+    fireball2.fireballCollide();
+  }
 }
 
 newGame() 

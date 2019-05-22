@@ -48,6 +48,10 @@ and
 
 ## Change Log
 
+### Version 1.2.1 - May 22, 2019
+
+* Fireballl collision fix
+
 ### Version 1.2.0 - May 21, 2019
 
 * Upgrade to Phaser 3.17.0
